@@ -16,7 +16,6 @@ export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
         <ambientLight intensity={0.5 * Math.PI} />
         <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr" />
         <CameraRig>
-            <Backdrop />
             <Center>
                 <Shirt />
             </Center>
@@ -24,39 +23,6 @@ export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
     </Canvas>
 )
 
-function Backdrop() {
-    const shadows = useRef()
-    useFrame((state, delta) =>
-        easing.dampC(shadows.current.getMesh().material.color, state.color, 0.25, delta)
-    )
-    return (
-        <AccumulativeShadows
-            ref={shadows}
-            temporal
-            frames={60}
-            alphaTest={0.85}
-            scale={5}
-            resolution={2048}
-            rotation={[Math.PI / 2, 0, 0]}
-            position={[0, 0, -0.14]}
-        >
-            <RandomizedLight
-                amount={4}
-                radius={9}
-                intensity={0.55 * Math.PI}
-                ambient={0.25}
-                position={[5, 5, -10]}
-            />
-            <RandomizedLight
-                amount={4}
-                radius={5}
-                intensity={0.25 * Math.PI}
-                ambient={0.55}
-                position={[-5, 5, -9]}
-            />
-        </AccumulativeShadows>
-    )
-}
 
 function CameraRig({ children }) {
     const group = useRef()
@@ -72,7 +38,6 @@ function CameraRig({ children }) {
 
     const handlePointerDown = (e) => {
         setIsDragging(true)
-        // Record the pointer’s screen coords and current rotation
         dragStart.current = [e.clientX, e.clientY]
         rotationStart.current = [...rotation]
     }
@@ -114,7 +79,7 @@ function CameraRig({ children }) {
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
-            onPointerLeave={handlePointerUp} // stops drag if mouse leaves
+            onPointerLeave={handlePointerUp}
         >
             {children}
         </group>
@@ -129,21 +94,50 @@ function Shirt(props) {
         easing.dampC(materials.lambert1.color, snap.color, 0.25, delta)
     )
 
+    console.log(texture)
+    texture.rotation = 0;
+
     return (
         <mesh
-            castShadow
+            castShadow={false}
             geometry={nodes.T_Shirt_male.geometry}
             material={materials.lambert1}
             material-roughness={1}
             {...props}
             dispose={null}
         >
-            <Decal
-                position={[0, 0.04, 0.15]}
-                rotation={[0, 0, 0]}
-                scale={0.15}
-                map={texture}
-            />
+            {/*Borst Midden*/}
+            {
+                snap.position === "bm" && (
+                    <Decal
+                        position={[0, 0.04, 0.15]}
+                        rotation={[0, 0, 0]}
+                        scale={0.15}
+                        map={texture}
+                    />
+                )
+            }
+
+            {/*Borst links*/}
+            {
+                snap.position === "bl" && (
+                    <Decal
+                        position={[0.08, 0.12, 0.09]}
+                        rotation={[-0.2, 0, 0]}
+                        scale={0.08}
+                        map={texture}
+                    />
+                )
+            }
+
+
+            {/*Schouder links WIP*/}
+            {/*<Decal*/}
+            {/*    position={[0.25, 0.105, -0.02]}*/}
+            {/*    rotation={[0, 0.1, 0.1]}*/}
+            {/*    scale={0.06}*/}
+            {/*    map={texture}*/}
+            {/*/>*/}
         </mesh>
     )
 }
