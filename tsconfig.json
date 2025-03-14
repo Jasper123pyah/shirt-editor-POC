@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",
     "strict": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "moduleResolution": "node",
-    "outDir": "dist",
-    "rootDir": "src"
+    "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src/**/*", "global.d.ts"]
 }
