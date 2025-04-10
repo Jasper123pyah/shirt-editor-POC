@@ -107,9 +107,9 @@ export const Overlay: React.FC = () => {
                         <label>Rotation X: {snap.decalRot[0].toFixed(3)}</label>
                         <input
                             type="range"
-                            min={-Math.PI}
-                            max={Math.PI}
-                            step={0.01}
+                            min={-Math.PI - 0.001}
+                            max={Math.PI + 0.001}
+                            step={(Math.PI) / 2}
                             value={snap.decalRot[0]}
                             onChange={(e) => {
                                 const rx = parseFloat(e.target.value)
@@ -120,9 +120,9 @@ export const Overlay: React.FC = () => {
                         <label>Rotation Y: {snap.decalRot[1].toFixed(3)}</label>
                         <input
                             type="range"
-                            min={-Math.PI}
-                            max={Math.PI}
-                            step={0.01}
+                            min={-Math.PI - 0.001}
+                            max={Math.PI + 0.001}
+                            step={(Math.PI) / 2}
                             value={snap.decalRot[1].toFixed(3)}
                             onChange={(e) => {
                                 const ry = parseFloat(e.target.value)
@@ -133,9 +133,9 @@ export const Overlay: React.FC = () => {
                         <label>Rotation Z: {snap.decalRot[2].toFixed(3)}</label>
                         <input
                             type="range"
-                            min={-Math.PI}
-                            max={Math.PI}
-                            step={0.01}
+                            min={-Math.PI - 0.001}
+                            max={Math.PI + 0.001}
+                            step={(Math.PI) / 2}
                             value={snap.decalRot[2]}
                             onChange={(e) => {
                                 const rz = parseFloat(e.target.value)

@@ -18,7 +18,7 @@ interface State {
 export const state = proxy<State>({
   colors: ['#ccc', '#EFBD4E', '#80C670', '#726DE8', '#EF674E', '#353934'],
   decals: ['react', 'three2', 'proforto'],
-  color: '#FFF',
+  color: '#EFBD4E',
   decal: 'proforto',
   positions: [
     { id: 'bl', title: 'Borst links' },
@@ -27,7 +27,7 @@ export const state = proxy<State>({
   position: 'bm',
 
   debug: false,
-  decalPos: [0, 0.4, 0.2],    // X, Y, Z
+  decalPos: [0, -0.04, -0.65],    // X, Y, Z
   decalRot: [0, 0, 0],       // Euler angles X, Y, Z
   decalScale: 0.3,           // Decal scale (percentage or direct)
 })

@@ -14,8 +14,8 @@ interface AppProps {
 
 /** The main Canvas + 3D scene setup */
 export const App: React.FC<AppProps> = ({
-                                            position = [0, 0, 2.5],
-                                            fov = 60,
+                                            position = [0, 0, 5],
+                                            fov = 70,
                                         }) => {
     return (
         <Canvas
@@ -25,7 +25,7 @@ export const App: React.FC<AppProps> = ({
             eventSource={document.getElementById('root')!}
             eventPrefix="client"
         >
-            <ambientLight intensity={0.5 * Math.PI}/>
+            <ambientLight intensity={0.5 * Math.PI}></ambientLight>
             <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr"/>
             <CameraRig>
                 <Center>
@@ -115,15 +115,17 @@ function Shirt(props: ShirtProps) {
     const snap = useSnapshot(state)
     const texture = useTexture(`/${snap.decal}.png`)
 
-    const gltf = useGLTF('/Broek.glb') as any
+    const gltf = useGLTF('/helm.glb') as any
     const {nodes, materials} = gltf
 
-    const geometry = nodes.temp.geometry;
+    const geometry = nodes[Object.keys(nodes)[0]].geometry;
     const material = materials[Object.keys(materials)[0]];
 
     useFrame((_, delta) => {
         easing.dampC(material.color, snap.color, 0.25, delta)
     })
+
+    const modelScale= 1;
 
     return (
         <mesh
@@ -131,6 +133,7 @@ function Shirt(props: ShirtProps) {
             material={material}
             material-roughness={1}
             dispose={null}
+            scale={[modelScale, modelScale, modelScale]}
             {...props}
         >
             <Decal
@@ -168,5 +171,5 @@ function Shirt(props: ShirtProps) {
 
 
 
-useGLTF.preload('/Broek.glb')
+useGLTF.preload('/helm.glb')
 ;['/react.png', '/three2.png', '/pmndrs.png'].forEach(useTexture.preload)
