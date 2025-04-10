@@ -1,17 +1,18 @@
 import { proxy } from 'valtio'
 
-interface Position {
-  id: string
-  title: string
-}
-
 interface State {
   colors: string[]
   decals: string[]
   color: string
   decal: string
-  positions: Position[]
+
+  positions: { id: string; title: string }[]
   position: string
+
+  debug: boolean
+  decalPos: [number, number, number]
+  decalRot: [number, number, number]
+  decalScale: number
 }
 
 export const state = proxy<State>({
@@ -23,5 +24,10 @@ export const state = proxy<State>({
     { id: 'bl', title: 'Borst links' },
     { id: 'bm', title: 'Borst midden' },
   ],
-  position: 'bl',
+  position: 'bm',
+
+  debug: false,
+  decalPos: [0, 0.4, 0.2],    // X, Y, Z
+  decalRot: [0, 0, 0],       // Euler angles X, Y, Z
+  decalScale: 0.3,           // Decal scale (percentage or direct)
 })

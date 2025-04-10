@@ -1,9 +1,11 @@
-import React, { useRef, useState, PointerEvent } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, useTexture, Decal, Environment, Center } from '@react-three/drei'
-import { easing } from 'maath'
-import { useSnapshot } from 'valtio'
-import { state } from './store'
+import React, {useRef, useState, PointerEvent} from 'react'
+import {Canvas, useFrame} from '@react-three/fiber'
+import {useGLTF, useTexture, Decal, Environment, Center} from '@react-three/drei'
+import {easing} from 'maath'
+import {useSnapshot} from 'valtio'
+import {state} from './store'
+import {OrbitControls} from '@react-three/drei'
+import {FrontSide} from "three";
 
 /** Props for the main <App> component */
 interface AppProps {
@@ -14,24 +16,26 @@ interface AppProps {
 /** The main Canvas + 3D scene setup */
 export const App: React.FC<AppProps> = ({
                                             position = [0, 0, 2.5],
-                                            fov = 25,
+                                            fov = 60,
                                         }) => {
     return (
-      <Canvas
-        shadows
-        camera={{ position, fov }}
-        gl={{ preserveDrawingBuffer: true }}
-        eventSource={document.getElementById('root')!}
-        eventPrefix="client"
-      >
-          <ambientLight intensity={0.5 * Math.PI} />
-          <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr" />
-          <CameraRig>
-              <Center>
-                  <Shirt />
-              </Center>
-          </CameraRig>
-      </Canvas>
+        <Canvas
+            shadows
+            camera={{position, fov}}
+            gl={{preserveDrawingBuffer: true}}
+            eventSource={document.getElementById('root')!}
+            eventPrefix="client"
+        >
+            <ambientLight intensity={0.5 * Math.PI}/>
+            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr"/>
+            <CameraRig>
+                <Center>
+                    <Shirt/>
+                </Center>
+            </CameraRig>
+            <OrbitControls enableRotate={false}
+                           enablePan={false}/>
+        </Canvas>
     )
 }
 
@@ -41,7 +45,7 @@ interface CameraRigProps {
 }
 
 /** Handles dragging/rotation of the shirt in the scene */
-const CameraRig: React.FC<CameraRigProps> = ({ children }) => {
+const CameraRig: React.FC<CameraRigProps> = ({children}) => {
     const group = useRef<THREE.Group>(null)
     const snap = useSnapshot(state)
 
@@ -81,10 +85,10 @@ const CameraRig: React.FC<CameraRigProps> = ({ children }) => {
     useFrame((st, delta) => {
         // Intro animation moves the camera slightly
         easing.damp3(
-          st.camera.position,
-          [0, 0, 2],
-          0.25,
-          delta
+            st.camera.position,
+            [0, 0, 2],
+            0.25,
+            delta
         )
         if (group.current) {
             group.current.rotation.x = rotation[0]
@@ -93,15 +97,15 @@ const CameraRig: React.FC<CameraRigProps> = ({ children }) => {
     })
 
     return (
-      <group
-        ref={group}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={handlePointerUp}
-      >
-          {children}
-      </group>
+        <group
+            ref={group}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerLeave={handlePointerUp}
+        >
+            {children}
+        </group>
     )
 }
 
@@ -113,56 +117,56 @@ function Shirt(props: ShirtProps) {
     const snap = useSnapshot(state)
     const texture = useTexture(`/${snap.decal}.png`)
 
-    // If you generated type definitions via gltfjsx, use them;
-    // here we cast to 'any' for brevity
-    const { nodes, materials } = useGLTF('/shirt_baked_collapsed.glb') as any
+    const gltf = useGLTF('/shirt_meshy.glb') as any
+    const {nodes, materials} = gltf
 
-    // Animate the shirt color
     useFrame((_, delta) => {
-        easing.dampC(materials.lambert1.color, snap.color, 0.25, delta)
+        // Animate the shirt color
+        easing.dampC(materials[""].color, snap.color, 0.25, delta)
     })
 
-    texture.rotation = 0
-
     return (
-      <mesh
-        castShadow={false}
-        geometry={nodes.T_Shirt_male.geometry}
-        material={materials.lambert1}
-        material-roughness={1}
-        {...props}
-        dispose={null}
-      >
-          {/*Borst Midden*/}
-          {snap.position === 'bm' && (
+        <mesh
+            geometry={nodes.mesh_0.geometry}
+            material={materials[""]}
+            material-roughness={1}
+            dispose={null}
+            {...props}
+        >
             <Decal
-              position={[0, 0.04, 0.15]}
-              rotation={[0, 0, 0]}
-              scale={0.15}
-              map={texture}
+                debug={snap.debug}
+                position={snap.decalPos}
+                rotation={snap.decalRot}
+                scale={snap.decalScale}
+                map={texture}
+                polygonOffsetFactor={-10}
+                depthTest
             />
-          )}
 
-          {/*Borst links*/}
-          {snap.position === 'bl' && (
-            <Decal
-              position={[0.08, 0.12, 0.09]}
-              rotation={[-0.2, 0, 0]}
-              scale={0.08}
-              map={texture}
-            />
-          )}
+            {/*<Decal*/}
+            {/*    position={[0.2, 0.6, 0.2]}*/}
+            {/*    rotation={[-0.1, 0, 0]}*/}
+            {/*    scale={0.15}*/}
+            {/*    map={texture}*/}
+            {/*    polygonOffsetFactor={-1}*/}
+            {/*    depthTest*/}
+            {/*/>*/}
 
-          {/* Example for another decal (commented out in original) */}
-          {/* <Decal
-        position={[0.25, 0.105, -0.02]}
-        rotation={[0, 0.1, 0.1]}
-        scale={0.06}
-        map={texture}
-      /> */}
-      </mesh>
+            {/*<Decal*/}
+            {/*    position={[0.8, 0.5, 0.05]}*/}
+            {/*    rotation={[0.2, 0.5, 0.1]}*/}
+            {/*    scale={0.1}*/}
+            {/*    map={texture}*/}
+            {/*    polygonOffsetFactor={-1}*/}
+            {/*    depthTest*/}
+            {/*/>*/}
+        </mesh>
     )
 }
 
-useGLTF.preload('/shirt_baked_collapsed.glb')
+
+
+
+
+useGLTF.preload('/shirt_meshy.glb')
 ;['/react.png', '/three2.png', '/pmndrs.png'].forEach(useTexture.preload)
