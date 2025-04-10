@@ -5,7 +5,6 @@ import {easing} from 'maath'
 import {useSnapshot} from 'valtio'
 import {state} from './store'
 import {OrbitControls} from '@react-three/drei'
-import {FrontSide} from "three";
 
 /** Props for the main <App> component */
 interface AppProps {
@@ -47,7 +46,6 @@ interface CameraRigProps {
 /** Handles dragging/rotation of the shirt in the scene */
 const CameraRig: React.FC<CameraRigProps> = ({children}) => {
     const group = useRef<THREE.Group>(null)
-    const snap = useSnapshot(state)
 
     // Local rotation state
     const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0])
@@ -117,18 +115,20 @@ function Shirt(props: ShirtProps) {
     const snap = useSnapshot(state)
     const texture = useTexture(`/${snap.decal}.png`)
 
-    const gltf = useGLTF('/shirt_meshy.glb') as any
+    const gltf = useGLTF('/Broek.glb') as any
     const {nodes, materials} = gltf
 
+    const geometry = nodes.temp.geometry;
+    const material = materials[Object.keys(materials)[0]];
+
     useFrame((_, delta) => {
-        // Animate the shirt color
-        easing.dampC(materials[""].color, snap.color, 0.25, delta)
+        easing.dampC(material.color, snap.color, 0.25, delta)
     })
 
     return (
         <mesh
-            geometry={nodes.mesh_0.geometry}
-            material={materials[""]}
+            geometry={geometry}
+            material={material}
             material-roughness={1}
             dispose={null}
             {...props}
@@ -139,7 +139,7 @@ function Shirt(props: ShirtProps) {
                 rotation={snap.decalRot}
                 scale={snap.decalScale}
                 map={texture}
-                polygonOffsetFactor={-10}
+                polygonOffsetFactor={-1}
                 depthTest
             />
 
@@ -168,5 +168,5 @@ function Shirt(props: ShirtProps) {
 
 
 
-useGLTF.preload('/shirt_meshy.glb')
+useGLTF.preload('/Broek.glb')
 ;['/react.png', '/three2.png', '/pmndrs.png'].forEach(useTexture.preload)
