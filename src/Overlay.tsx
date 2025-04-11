@@ -157,6 +157,21 @@ export const Overlay: React.FC = () => {
                         />
                     </div>
 
+                    <div className="decals section">
+                        <b>Model</b>
+                        <div className="decals--container">
+                            {snap.models.map((model) => (
+                                <div
+                                    key={model.name}
+                                    className="model"
+                                    onClick={() => (state.model = model)}
+                                >
+                                    {model.name}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                     <button
                         className="share"
                         onClick={() => {

@@ -1,22 +1,34 @@
 import React, {useRef, useState, PointerEvent} from 'react'
-import {Canvas, useFrame} from '@react-three/fiber'
+import {Canvas, ReactThreeFiber, useFrame} from '@react-three/fiber'
 import {useGLTF, useTexture, Decal, Environment, Center} from '@react-three/drei'
 import {easing} from 'maath'
 import {useSnapshot} from 'valtio'
 import {state} from './store'
 import {OrbitControls} from '@react-three/drei'
+import * as THREE from 'three'
+
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            mesh: ReactThreeFiber.Object3DNode<THREE.Mesh, typeof THREE.Mesh>
+            group: ReactThreeFiber.Object3DNode<THREE.Group, typeof THREE.Group>
+            ambientLight: ReactThreeFiber.Object3DNode<THREE.AmbientLight, typeof THREE.AmbientLight>
+            directionalLight: ReactThreeFiber.Object3DNode<THREE.DirectionalLight, typeof THREE.DirectionalLight>
+        }
+    }
+}
 
 /** Props for the main <App> component */
 interface AppProps {
     position?: [number, number, number]
-    fov?: number
 }
 
 /** The main Canvas + 3D scene setup */
 export const App: React.FC<AppProps> = ({
-                                            position = [0, 0, 5],
-                                            fov = 70,
+                                            position = [0, 0, 2.5],
                                         }) => {
+    const fov = 60
+
     return (
         <Canvas
             shadows
@@ -25,107 +37,48 @@ export const App: React.FC<AppProps> = ({
             eventSource={document.getElementById('root')!}
             eventPrefix="client"
         >
-            <ambientLight intensity={0.5 * Math.PI}></ambientLight>
+            {/* Ambient + Environment for overall light */}
+            <ambientLight intensity={0.5}/>
             <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr"/>
-            <CameraRig>
-                <Center>
-                    <Shirt/>
-                </Center>
-            </CameraRig>
-            <OrbitControls enableRotate={false}
-                           enablePan={false}/>
+
+            {/* Additional directional light */}
+            <directionalLight
+                intensity={1}
+                position={[5, 5, 5]}
+                castShadow
+            />
+
+            <Center>
+                <Model/>
+            </Center>
+
+            <OrbitControls
+                enableRotate={true}
+                enablePan={true}
+                enableZoom={true}
+                minDistance={0.5}
+                maxDistance={3}
+                zoomSpeed={1}
+            />
         </Canvas>
     )
 }
 
-/** Props for the <CameraRig> component (children are 3D objects) */
-interface CameraRigProps {
-    children?: React.ReactNode
-}
+type ModelProps = JSX.IntrinsicElements['mesh']
 
-/** Handles dragging/rotation of the shirt in the scene */
-const CameraRig: React.FC<CameraRigProps> = ({children}) => {
-    const group = useRef<THREE.Group>(null)
-
-    // Local rotation state
-    const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0])
-
-    // Track drag state
-    const [isDragging, setIsDragging] = useState(false)
-    const dragStart = useRef<[number, number]>([0, 0])
-    const rotationStart = useRef<[number, number, number]>([0, 0, 0])
-
-    const handlePointerDown = (e: PointerEvent<HTMLElement>) => {
-        setIsDragging(true)
-        dragStart.current = [e.clientX, e.clientY]
-        rotationStart.current = [...rotation]
-    }
-
-    const handlePointerMove = (e: PointerEvent<HTMLElement>) => {
-        if (!isDragging) return
-
-        const deltaX = e.clientX - dragStart.current[0]
-        const deltaY = e.clientY - dragStart.current[1]
-
-        // Adjust rotation – tweak 0.01 to taste
-        setRotation([
-            rotationStart.current[0] + deltaY * 0.01,
-            rotationStart.current[1] + deltaX * 0.01,
-            0,
-        ])
-    }
-
-    const handlePointerUp = () => {
-        setIsDragging(false)
-    }
-
-    // Update camera position & apply rotation each frame
-    useFrame((st, delta) => {
-        // Intro animation moves the camera slightly
-        easing.damp3(
-            st.camera.position,
-            [0, 0, 2],
-            0.25,
-            delta
-        )
-        if (group.current) {
-            group.current.rotation.x = rotation[0]
-            group.current.rotation.y = rotation[1]
-        }
-    })
-
-    return (
-        <group
-            ref={group}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerLeave={handlePointerUp}
-        >
-            {children}
-        </group>
-    )
-}
-
-/** Props for the <Shirt> component; extend mesh props if needed */
-type ShirtProps = JSX.IntrinsicElements['mesh']
-
-/** 3D Shirt model that supports color & decal updates */
-function Shirt(props: ShirtProps) {
+function Model(props: ModelProps) {
     const snap = useSnapshot(state)
     const texture = useTexture(`/${snap.decal}.png`)
 
-    const gltf = useGLTF('/helm.glb') as any
-    const {nodes, materials} = gltf
 
-    const geometry = nodes[Object.keys(nodes)[0]].geometry;
-    const material = materials[Object.keys(materials)[0]];
+    const gltf = useGLTF(`/${snap.model.name}.glb`) as any
+    const {nodes, materials} = gltf
+    const geometry = nodes[Object.keys(nodes)[snap.model.geometryNode]].geometry
+    const material = materials[Object.keys(materials)[0]]
 
     useFrame((_, delta) => {
         easing.dampC(material.color, snap.color, 0.25, delta)
     })
-
-    const modelScale= 1;
 
     return (
         <mesh
@@ -133,7 +86,6 @@ function Shirt(props: ShirtProps) {
             material={material}
             material-roughness={1}
             dispose={null}
-            scale={[modelScale, modelScale, modelScale]}
             {...props}
         >
             <Decal
@@ -145,31 +97,6 @@ function Shirt(props: ShirtProps) {
                 polygonOffsetFactor={-1}
                 depthTest
             />
-
-            {/*<Decal*/}
-            {/*    position={[0.2, 0.6, 0.2]}*/}
-            {/*    rotation={[-0.1, 0, 0]}*/}
-            {/*    scale={0.15}*/}
-            {/*    map={texture}*/}
-            {/*    polygonOffsetFactor={-1}*/}
-            {/*    depthTest*/}
-            {/*/>*/}
-
-            {/*<Decal*/}
-            {/*    position={[0.8, 0.5, 0.05]}*/}
-            {/*    rotation={[0.2, 0.5, 0.1]}*/}
-            {/*    scale={0.1}*/}
-            {/*    map={texture}*/}
-            {/*    polygonOffsetFactor={-1}*/}
-            {/*    depthTest*/}
-            {/*/>*/}
         </mesh>
     )
 }
-
-
-
-
-
-useGLTF.preload('/helm.glb')
-;['/react.png', '/three2.png', '/pmndrs.png'].forEach(useTexture.preload)
