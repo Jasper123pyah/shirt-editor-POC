@@ -46,5 +46,6 @@ export const state = proxy<State>({
         {name: 'helm', geometryNode: 0},
         {name: 'broek', geometryNode: 1},
         {name: 'shirt', geometryNode: 1},
+        {name: 'polo', geometryNode: 1},
     ],
 })
