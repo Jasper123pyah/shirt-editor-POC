@@ -353,3 +353,7 @@ button:hover {
         left: 0;
     }
 }
+
+.value-display {
+    font-size: 1.1rem;
+}

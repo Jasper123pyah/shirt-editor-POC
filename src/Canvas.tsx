@@ -28,6 +28,7 @@ export const App: React.FC<AppProps> = ({
                                             position = [0, 0, 2.5],
                                         }) => {
     const fov = 60
+    const snap = useSnapshot(state)
 
     return (
         <Canvas
@@ -56,8 +57,8 @@ export const App: React.FC<AppProps> = ({
                 enableRotate={true}
                 enablePan={true}
                 enableZoom={true}
-                minDistance={0.5}
-                maxDistance={3}
+                minDistance={snap.minZoom}
+                maxDistance={snap.maxZoom}
                 zoomSpeed={1}
             />
         </Canvas>
@@ -70,9 +71,11 @@ function Model(props: ModelProps) {
     const snap = useSnapshot(state)
     const texture = useTexture(`/${snap.decal}.png`)
 
+    const pocketTexture = useTexture(`/pocket.png`)
 
     const gltf = useGLTF(`/${snap.model.name}.glb`) as any
     const {nodes, materials} = gltf
+    console.log(gltf)
     const geometry = nodes[Object.keys(nodes)[snap.model.geometryNode]].geometry
     const material = materials[Object.keys(materials)[0]]
 
@@ -89,12 +92,20 @@ function Model(props: ModelProps) {
             {...props}
         >
             <Decal
+                position={[0.1,0.17,0.08]}
+                rotation={[0,0,0]}
+                scale={0.1}
+                map={pocketTexture}
+                polygonOffsetFactor={-1}
+                depthTest
+            />
+            <Decal
                 debug={snap.debug}
                 position={snap.decalPos}
                 rotation={snap.decalRot}
                 scale={snap.decalScale}
                 map={texture}
-                polygonOffsetFactor={-1}
+                polygonOffsetFactor={-2}
                 depthTest
             />
         </mesh>
