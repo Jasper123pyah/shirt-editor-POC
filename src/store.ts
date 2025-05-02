@@ -63,6 +63,9 @@ export const state = proxy<State>({
         {name: 'polo_korte_mouwen', geometryNode: 1, url: null},
         {name: 'polo_lange_mouwen', geometryNode: 1, url: null},
         {name: 'trui', geometryNode: 1, url: null},
+        {name: 'hoodie', geometryNode: 1, url: null},
+        {name: 'bodywarmer', geometryNode: 1, url: null},
+        {name: 'vest_met_zip', geometryNode: 1, url: null},
     ],
 
     cameraPos: [0, 0, 2.5],

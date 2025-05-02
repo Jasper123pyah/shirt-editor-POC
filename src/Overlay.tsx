@@ -82,25 +82,9 @@ export const Overlay: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Existing Decals Section */}
-                    <div className="decals section">
-                        <b>Design</b>
-                        <div className="decals--container">
-                            {snap.decals.map((decal) => (
-                                <div
-                                    key={decal}
-                                    className="decal"
-                                    onClick={() => (state.decal = decal)}
-                                >
-                                    <img src={decal + '_thumb.png'} alt="brand"/>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
                     <div className="decals section">
                         <b>Model</b>
-                        <div className="decals--container">
+                        <div className="decals--container model">
                             <select
                                 className="decals--dropdown"
                                 onChange={(e) => {
@@ -130,7 +114,7 @@ export const Overlay: React.FC = () => {
                     </div>
 
                     <div className="section" style={{width: '100%'}}>
-                        <b>Debug</b>
+                        <b>Decal Transforms</b>
                         <div className="debug">
                             <input
                                 type="checkbox"
@@ -139,8 +123,6 @@ export const Overlay: React.FC = () => {
                             />
                             <label>Debug Mode</label>
                         </div>
-                        <b>Decal Transforms</b>
-
                         {/* Position Sliders */}
                         <label>
                             Position X:{' '}
