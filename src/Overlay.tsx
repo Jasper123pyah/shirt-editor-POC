@@ -116,6 +116,11 @@ export const Overlay: React.FC = () => {
                                 ))}
                             </select>
                             <input
+                                type="number"
+                                value={snap.model.geometryNode}
+                                onChange={e => state.model.geometryNode = parseInt(e.target.value)}
+                            />
+                            <input
                                 type="file"
                                 accept=".glb"
                                 onChange={handleModelUpload}
