@@ -1,62 +1,64 @@
-import React, {useRef, useState, PointerEvent} from 'react'
-import {Canvas, ReactThreeFiber, useFrame} from '@react-three/fiber'
-import {useGLTF, useTexture, Decal, Environment, Center} from '@react-three/drei'
-import {easing} from 'maath'
-import {useSnapshot} from 'valtio'
-import {state} from './store'
-import {OrbitControls} from '@react-three/drei'
+import React, { useRef } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { useGLTF, useTexture, Decal, Environment, Center, OrbitControls } from '@react-three/drei'
+import { easing } from 'maath'
+import { useSnapshot } from 'valtio'
+import { state } from './store'
 import * as THREE from 'three'
 
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            mesh: ReactThreeFiber.Object3DNode<THREE.Mesh, typeof THREE.Mesh>
-            group: ReactThreeFiber.Object3DNode<THREE.Group, typeof THREE.Group>
-            ambientLight: ReactThreeFiber.Object3DNode<THREE.AmbientLight, typeof THREE.AmbientLight>
-            directionalLight: ReactThreeFiber.Object3DNode<THREE.DirectionalLight, typeof THREE.DirectionalLight>
+
+function CameraSync({ controlsRef }: { controlsRef: React.RefObject<any> }) {
+    const pos = new THREE.Vector3()
+    const quat = new THREE.Quaternion()
+    const euler = new THREE.Euler()
+
+    useFrame(() => {
+        const controls = controlsRef.current
+        if (controls) {
+            const camera = controls.object as THREE.PerspectiveCamera
+            camera.updateMatrixWorld()
+            camera.getWorldPosition(pos)
+            state.cameraPos = [pos.x, pos.y, pos.z]
+
+            camera.getWorldQuaternion(quat)
+            euler.setFromQuaternion(quat)
+            state.cameraRot = [euler.x, euler.y, euler.z]
+
+            const tgt = controls.target
+            state.cameraTarget = [tgt.x, tgt.y, tgt.z]
         }
-    }
+    })
+    return null
 }
 
-/** Props for the main <App> component */
-interface AppProps {
-    position?: [number, number, number]
-}
-
-/** The main Canvas + 3D scene setup */
-export const App: React.FC<AppProps> = ({
-                                            position = [0, 0, 2.5],
-                                        }) => {
-    const fov = 60
+export const App: React.FC = () => {
     const snap = useSnapshot(state)
+    const controlsRef = useRef<any>()
 
     return (
         <Canvas
             shadows
-            camera={{position, fov}}
-            gl={{preserveDrawingBuffer: true}}
+            camera={{ position: state.cameraPos, fov: 60 }}
+            gl={{ preserveDrawingBuffer: true }}
             eventSource={document.getElementById('root')!}
             eventPrefix="client"
         >
-            {/* Ambient + Environment for overall light */}
-            <ambientLight intensity={0.5}/>
-            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr"/>
+            {/* Sync camera each frame */}
+            <CameraSync controlsRef={controlsRef} />
 
-            {/* Additional directional light */}
-            <directionalLight
-                intensity={1}
-                position={[5, 5, 5]}
-                castShadow
-            />
+            <ambientLight intensity={0.5} />
+            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr" />
+            <directionalLight intensity={1} position={[5, 5, 5]} castShadow />
 
             <Center>
-                <Model/>
+                <Model />
             </Center>
 
             <OrbitControls
-                enableRotate={true}
-                enablePan={true}
-                enableZoom={true}
+                ref={controlsRef}
+                enableRotate
+                enablePan
+                enableZoom
                 minDistance={snap.minZoom}
                 maxDistance={snap.maxZoom}
                 zoomSpeed={1}
@@ -65,17 +67,13 @@ export const App: React.FC<AppProps> = ({
     )
 }
 
-type ModelProps = JSX.IntrinsicElements['mesh']
-
-function Model(props: ModelProps) {
+function Model(props: JSX.IntrinsicElements['mesh']) {
     const snap = useSnapshot(state)
     const texture = useTexture(`/${snap.decal}.png`)
-
     const pocketTexture = useTexture(`/pocket.png`)
-
-    const gltf = useGLTF(`/${snap.model.name}.glb`) as any
-    const {nodes, materials} = gltf
-    console.log(gltf)
+    const path = snap.model.url ?? `/${snap.model.name}.glb`
+    const gltf = useGLTF(path) as any
+    const { nodes, materials } = gltf
     const geometry = nodes[Object.keys(nodes)[snap.model.geometryNode]].geometry
     const material = materials[Object.keys(materials)[0]]
 
@@ -84,30 +82,9 @@ function Model(props: ModelProps) {
     })
 
     return (
-        <mesh
-            geometry={geometry}
-            material={material}
-            material-roughness={1}
-            dispose={null}
-            {...props}
-        >
-            <Decal
-                position={[0.1,0.17,0.08]}
-                rotation={[0,0,0]}
-                scale={0.1}
-                map={pocketTexture}
-                polygonOffsetFactor={-1}
-                depthTest
-            />
-            <Decal
-                debug={snap.debug}
-                position={snap.decalPos}
-                rotation={snap.decalRot}
-                scale={snap.decalScale}
-                map={texture}
-                polygonOffsetFactor={-2}
-                depthTest
-            />
+        <mesh geometry={geometry} material={material} material-roughness={1} dispose={null} {...props}>
+            <Decal position={[0.1, 0.17, 0.08]} rotation={[0, 0, 0]} scale={0.1} map={pocketTexture} polygonOffsetFactor={-1} depthTest />
+            <Decal debug={snap.debug} position={snap.decalPos} rotation={snap.decalRot} scale={snap.decalScale} map={texture} polygonOffsetFactor={-2} depthTest />
         </mesh>
     )
 }

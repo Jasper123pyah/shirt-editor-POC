@@ -1,10 +1,54 @@
 import React from 'react'
-import { useSnapshot } from 'valtio'
-import { state } from './store'
+import {useSnapshot} from 'valtio'
+import {state} from './store'
 
 export const Overlay: React.FC = () => {
     const snap = useSnapshot(state)
     const [openOverlay, setOpenOverlay] = React.useState(false)
+
+    const screenShot = () => {
+        const canvas = document.querySelector('canvas')
+        if (!canvas) return
+        const link = document.createElement('a')
+        link.setAttribute('download', 'canvas.png')
+        link.setAttribute(
+            'href',
+            canvas
+                .toDataURL('image/png')
+                .replace('image/png', 'image/octet-stream')
+        )
+        link.click()
+    }
+
+    const handleModelUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        const url = URL.createObjectURL(file)
+        state.models = [...snap.models, { name: url, geometryNode: 1, url }]
+        state.model = { name: url, geometryNode: 1, url }
+    }
+
+    const exportState = () => {
+        const data = {
+            minZoom: snap.minZoom,
+            maxZoom: snap.maxZoom,
+            decalPos: snap.decalPos,
+            decalRot: snap.decalRot,
+            decalScale: snap.decalScale,
+            modelName: snap.model.name,
+            cameraPos: snap.cameraPos,
+            cameraRot: snap.cameraRot,
+            cameraTarget: snap.cameraTarget,
+        }
+        const json = JSON.stringify(data, null, 2)
+        const blob = new Blob([json], {type: 'application/json'})
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = snap.model.name + '-scene-settings.json'
+        link.click()
+        URL.revokeObjectURL(url)
+    }
 
     return (
         <div
@@ -19,7 +63,9 @@ export const Overlay: React.FC = () => {
             <button className={'open-overlay'} onClick={() => setOpenOverlay(!openOverlay)}>
                 {openOverlay ? 'Close' : 'Open'} overlay
             </button>
-            <div className={`customizer__container`} style={{ display: openOverlay ? 'flex' : '' }}>
+            <div className={`customizer__container`} style={{display: openOverlay ? 'flex' : ''}}
+
+            >
                 <div className="customizer">
                     {/* Existing Color Section */}
                     <div className="section">
@@ -29,7 +75,7 @@ export const Overlay: React.FC = () => {
                                 <div
                                     key={color}
                                     className="circle"
-                                    style={{ background: color }}
+                                    style={{background: color}}
                                     onClick={() => (state.color = color)}
                                 />
                             ))}
@@ -46,7 +92,7 @@ export const Overlay: React.FC = () => {
                                     className="decal"
                                     onClick={() => (state.decal = decal)}
                                 >
-                                    <img src={decal + '_thumb.png'} alt="brand" />
+                                    <img src={decal + '_thumb.png'} alt="brand"/>
                                 </div>
                             ))}
                         </div>
@@ -69,10 +115,16 @@ export const Overlay: React.FC = () => {
                                     </option>
                                 ))}
                             </select>
+                            <input
+                                type="file"
+                                accept=".glb"
+                                onChange={handleModelUpload}
+                                style={{ marginLeft: '8px' }}
+                            />
                         </div>
                     </div>
 
-                    <div className="section" style={{ width: '100%' }}>
+                    <div className="section" style={{width: '100%'}}>
                         <b>Debug</b>
                         <div className="debug">
                             <input
@@ -297,21 +349,9 @@ export const Overlay: React.FC = () => {
 
                     <button
                         className="share"
-                        onClick={() => {
-                            const canvas = document.querySelector('canvas')
-                            if (!canvas) return
-                            const link = document.createElement('a')
-                            link.setAttribute('download', 'canvas.png')
-                            link.setAttribute(
-                                'href',
-                                canvas
-                                    .toDataURL('image/png')
-                                    .replace('image/png', 'image/octet-stream')
-                            )
-                            link.click()
-                        }}
+                        onClick={exportState}
                     >
-                        PROEFDRUK
+                        EXPORT
                     </button>
                 </div>
             </div>

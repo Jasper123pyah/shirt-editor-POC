@@ -18,12 +18,18 @@ interface State {
     decalScale: number
     model: {
         name: string
-        geometryNode: number
+        geometryNode: number,
+        url: string | null
     }
     models: {
         name: string
-        geometryNode: number
+        geometryNode: number,
+        url: string | null
     }[]
+
+    cameraPos: [number, number, number]
+    cameraRot: [number, number, number]
+    cameraTarget: [number, number, number]
 }
 
 export const state = proxy<State>({
@@ -45,14 +51,21 @@ export const state = proxy<State>({
     model: {
         name: 'shirt',
         geometryNode: 1,
+        url: null
     },
     models: [
-        {name: 'lange_broek', geometryNode: 1},
-        {name: 'shirt', geometryNode: 1},
-        {name: 'polo', geometryNode: 1},
-        {name: 'longsleeve', geometryNode: 1},
-        {name: 'overall_lange_mouwen', geometryNode: 1},
-        {name: 'overhemd_korte_mouwen', geometryNode: 1},
-        {name: 'overhemd_lange_mouwen', geometryNode: 1},
+        {name: 'lange_broek', geometryNode: 1, url: null},
+        {name: 'shirt', geometryNode: 1, url: null},
+        {name: 'longsleeve', geometryNode: 1, url: null},
+        {name: 'overall_lange_mouwen', geometryNode: 1, url: null},
+        {name: 'overhemd_korte_mouwen', geometryNode: 1, url: null},
+        {name: 'overhemd_lange_mouwen', geometryNode: 1, url: null},
+        {name: 'polo_korte_mouwen', geometryNode: 1, url: null},
+        {name: 'polo_lange_mouwen', geometryNode: 1, url: null},
+        {name: 'trui', geometryNode: 1, url: null},
     ],
+
+    cameraPos: [0, 0, 2.5],
+    cameraRot: [0, 0, 0],
+    cameraTarget: [0, 0, 0],
 })

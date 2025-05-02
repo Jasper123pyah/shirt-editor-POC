@@ -177,8 +177,7 @@ button:hover {
     width: 100%;
     margin-bottom: 25px;
     margin-right: 40px;
-    padding: 40px 0;
-
+    overflow: auto;
     @media screen and (max-width: 600px) {
         display: none;
         align-items: flex-start;
@@ -206,9 +205,6 @@ button:hover {
 }
 
 .share {
-    bottom: 40px;
-    position: absolute;
-    right: 40px;
     background-color: blue;
 }
 
