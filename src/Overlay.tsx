@@ -4,6 +4,9 @@ import {state} from './store'
 
 export const Overlay: React.FC = () => {
     const snap = useSnapshot(state)
+
+    if (!snap.model) return null
+
     const [openOverlay, setOpenOverlay] = React.useState(false)
 
     const screenShot = () => {
@@ -19,15 +22,6 @@ export const Overlay: React.FC = () => {
         )
         link.click()
     }
-
-    const handleModelUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]
-        if (!file) return
-        const url = URL.createObjectURL(file)
-        state.models = [...snap.models, { name: url, url }]
-        state.model = { name: url, url }
-    }
-
     const exportState = () => {
         const data = {
             decal_position_x: snap.decalPos[0],
@@ -95,7 +89,8 @@ export const Overlay: React.FC = () => {
                             <select
                                 className="decals--dropdown"
                                 onChange={(e) => {
-                                    const selectedModel = snap.models.find((model) => model.name === e.target.value)
+                                    const selectedModel = state.models.find(
+                                        (model) => model.name === e.target.value)
                                     if (selectedModel) state.model = selectedModel
                                 }}
                                 value={snap.model.name}
@@ -106,12 +101,6 @@ export const Overlay: React.FC = () => {
                                     </option>
                                 ))}
                             </select>
-                            <input
-                                type="file"
-                                accept=".glb"
-                                onChange={handleModelUpload}
-                                style={{ marginLeft: '8px' }}
-                            />
                         </div>
                     </div>
 

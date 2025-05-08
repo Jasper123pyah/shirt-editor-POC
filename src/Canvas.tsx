@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, useTexture, Decal, Environment, Center, OrbitControls } from '@react-three/drei'
 import { easing } from 'maath'
 import { useSnapshot } from 'valtio'
-import { state } from './store'
+import { state, loadVariants } from './store'
 import * as THREE from 'three'
 
 function CameraSync({ controlsRef }: { controlsRef: React.RefObject<any> }) {
@@ -31,8 +31,12 @@ function CameraSync({ controlsRef }: { controlsRef: React.RefObject<any> }) {
 }
 
 export const App: React.FC = () => {
-    const snap = useSnapshot(state)
+    useEffect(() => { loadVariants() }, [])
+
     const controlsRef = useRef<any>()
+    const snap = useSnapshot(state)
+
+    if (!snap.model) return null
 
     return (
         <Canvas
@@ -65,56 +69,49 @@ export const App: React.FC = () => {
     )
 }
 
-function Model(props: JSX.IntrinsicElements['mesh']) {
+function Model() {
     const snap = useSnapshot(state)
+
     const pocketTexture = useTexture('/pocket.png')
-    const decalTexture = useTexture(`/${snap.decal}.png`)
-    const source = snap.model.url ?? `/${snap.model.name}.glb`
-    const gltf = useGLTF(source) as any
+    const decalTexture  = useTexture(`/${snap.decal}.png`)
 
-    useFrame((_, delta) => {
+    const gltf = useGLTF(`/${snap.model!.slug}.glb`) as any
+
+    const materialRef = useRef<any>()
+    useEffect(() => {
         if (materialRef.current) {
-            easing.dampC(materialRef.current.color, snap.color, 0.25, delta)
+            materialRef.current.color.set(snap.color)
         }
-    })
+    }, [snap.color])
 
-    const nodes = gltf.nodes || {}
-    const keys = Object.keys(nodes)
-    const nodeKey = keys[1]
-    const geometry = nodes[nodeKey]?.geometry
-    if (!geometry) {
-        console.warn('Geometry node missing:', nodeKey)
-        return null
-    }
-
-    const materials = gltf.materials || {}
-    const matKeys = Object.keys(materials)
-    if (matKeys.length === 0) {
-        console.warn('No materials found')
-        return null
-    }
-    const material = materials[matKeys[0]]
-    const materialRef = { current: material }
+    const meshNode   = Object.values(gltf.nodes)[1] as any
+    const meshMat    = Object.values(gltf.materials)[0] as any
+    materialRef.current = meshMat
 
     return (
-        <mesh geometry={geometry} material={material} material-roughness={1} dispose={null} {...props}>
-            {/*<Decal*/}
-            {/*    position={[0.1, 0.17, 0.08]}*/}
-            {/*    rotation={[0, 0, 0]}*/}
-            {/*    scale={0.1}*/}
-            {/*    map={pocketTexture}*/}
-            {/*    polygonOffsetFactor={-1}*/}
-            {/*    depthTest*/}
-            {/*/>*/}
+        <mesh geometry={meshNode.geometry} material={meshMat} material-roughness={1} dispose={null}>
+            {snap.model!.pockets.map((pocket, i) => (
+                <Decal
+                    key={`pocket-${i}`}
+                    map={pocketTexture}
+                    position={[pocket.decal_position_x, pocket.decal_position_y, pocket.decal_position_z]}
+                    rotation={[pocket.decal_rotation_x, pocket.decal_rotation_y, pocket.decal_rotation_z]}
+                    scale={pocket.decal_scale}
+                    polygonOffsetFactor={-1}
+                    depthTest
+                />
+            ))}
+
             <Decal
                 debug={snap.debug}
+                map={decalTexture}
                 position={snap.decalPos}
                 rotation={snap.decalRot}
                 scale={snap.decalScale}
-                map={decalTexture}
                 polygonOffsetFactor={-2}
                 depthTest
             />
         </mesh>
     )
 }
+

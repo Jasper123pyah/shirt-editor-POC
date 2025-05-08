@@ -1,0 +1,876 @@
+{
+  "models": [
+    {
+      "modelName": "shirt",
+      "name": "Shirt",
+      "pockets": []
+    },
+    {
+      "modelName": "shirt",
+      "name": "Shirt met borstzak links",
+      "pockets": [
+        {
+          "decal_position_x": 0.07,
+          "decal_position_y": 0.17,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "shirt",
+      "name": "Shirt met borstzak rechts",
+      "pockets": [
+        {
+          "decal_position_x": -0.07,
+          "decal_position_y": 0.17,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "overhemd_korte_mouwen",
+      "name": "Overhemd korte mouwen",
+      "pockets": []
+    },
+    {
+      "modelName": "overhemd_korte_mouwen",
+      "name": "Overhemd korte mouwen met borstzak links",
+      "pockets": [
+        {
+          "decal_position_x": 0.09,
+          "decal_position_y": 0.11,
+          "decal_position_z": 0.04,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "overhemd_korte_mouwen",
+      "name": "Overhemd korte mouwen met borstzak",
+      "pockets": [
+        {
+          "decal_position_x": -0.09,
+          "decal_position_y": 0.11,
+          "decal_position_z": 0.04,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "overhemd_korte_mouwen",
+      "name": "Overhemd korte mouwen met 2× borstzak",
+      "pockets": [
+        {
+          "decal_position_x": -0.09,
+          "decal_position_y": 0.11,
+          "decal_position_z": 0.04,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        },
+        {
+          "decal_position_x": 0.09,
+          "decal_position_y": 0.11,
+          "decal_position_z": 0.04,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "overhemd_lange_mouwen",
+      "name": "Overhemd lange mouwen",
+      "pockets": []
+    },
+    {
+      "modelName": "overhemd_lange_mouwen",
+      "name": "Overhemd lange mouwen met borstzak links",
+      "pockets": [
+        {
+          "decal_position_x": 0.09,
+          "decal_position_y": 0.2,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        }
+      ]
+    },
+    {
+      "modelName": "overhemd_lange_mouwen",
+      "name": "Overhemd lange mouwen met borstzak rechts",
+      "pockets": [
+        {
+          "decal_position_x": -0.09,
+          "decal_position_y": 0.2,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        }
+      ]
+    },
+    {
+      "modelName": "overhemd_lange_mouwen",
+      "name": "Overhemd lange mouwen met 2× borstzak",
+      "pockets": [
+        {
+          "decal_position_x": -0.09,
+          "decal_position_y": 0.2,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        },
+        {
+          "decal_position_x": 0.09,
+          "decal_position_y": 0.2,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        }
+      ]
+    },
+    {
+      "modelName": "polo_korte_mouwen",
+      "name": "Polo korte mouwen",
+      "pockets": []
+    },
+    {
+      "modelName": "polo_korte_mouwen",
+      "name": "Polo korte mouwen met borstzak links",
+      "pockets": [
+        {
+          "decal_position_x": 0,
+          "decal_position_y": 0,
+          "decal_position_z": 0,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 1
+        }
+      ]
+    },
+    {
+      "modelName": "polo_korte_mouwen",
+      "name": "Polo korte mouwen met borstzak rechts",
+      "pockets": [
+        {
+          "decal_position_x": 0,
+          "decal_position_y": 0,
+          "decal_position_z": 0,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 1
+        }
+      ]
+    },
+    {
+      "modelName": "polo_lange_mouwen",
+      "name": "Polo lange mouwen",
+      "pockets": []
+    },
+    {
+      "modelName": "polo_lange_mouwen",
+      "name": "Polo lange mouwen met borstzak links",
+      "pockets": [
+        {
+          "decal_position_x": 0.08,
+          "decal_position_y": 0.16,
+          "decal_position_z": 0.08,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "polo_lange_mouwen",
+      "name": "Polo lange mouwen met borstzak rechts",
+      "pockets": [
+        {
+          "decal_position_x": -0.08,
+          "decal_position_y": 0.16,
+          "decal_position_z": 0.08,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "longsleeve",
+      "name": "Longsleeve",
+      "pockets": []
+    },
+    {
+      "modelName": "longsleeve",
+      "name": "Longsleeve met borstzak links",
+      "pockets": [
+        {
+          "decal_position_x": 0.07,
+          "decal_position_y": 0.19,
+          "decal_position_z": 0.08,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "longsleeve",
+      "name": "Longsleeve met borstzak rechts",
+      "pockets": [
+        {
+          "decal_position_x": -0.07,
+          "decal_position_y": 0.19,
+          "decal_position_z": 0.08,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "longsleeve",
+      "name": "Longsleeve met 2× borstzak",
+      "pockets": [
+        {
+          "decal_position_x": -0.07,
+          "decal_position_y": 0.19,
+          "decal_position_z": 0.08,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        },
+        {
+          "decal_position_x": 0.07,
+          "decal_position_y": 0.19,
+          "decal_position_z": 0.08,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "trui",
+      "name": "Trui",
+      "pockets": []
+    },
+    {
+      "modelName": "trui",
+      "name": "Trui met borstzak links",
+      "pockets": [
+        {
+          "decal_position_x": 0.07,
+          "decal_position_y": 0.2,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "trui",
+      "name": "Trui met borstzak rechts",
+      "pockets": [
+        {
+          "decal_position_x": -0.07,
+          "decal_position_y": 0.2,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "trui",
+      "name": "Trui met 2× borstzak",
+      "pockets": [
+        {
+          "decal_position_x": 0.07,
+          "decal_position_y": 0.2,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        },
+        {
+          "decal_position_x": -0.07,
+          "decal_position_y": 0.2,
+          "decal_position_z": 0.13,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.12
+        }
+      ]
+    },
+    {
+      "modelName": "hoodie",
+      "name": "Hoodie (kangaroo-zak)",
+      "pockets": [
+        {
+          "decal_position_x": 0,
+          "decal_position_y": 0,
+          "decal_position_z": 0,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 1
+        }
+      ]
+    },
+    {
+      "modelName": "hoodie",
+      "name": "Hoodie met borstzak",
+      "pockets": []
+    },
+    {
+      "modelName": "bodywarmer",
+      "name": "Bodywarmer",
+      "pockets": []
+    },
+    {
+      "modelName": "bodywarmer",
+      "name": "Bodywarmer met zijzakken",
+      "pockets": [
+        {
+          "decal_position_x": 0.09,
+          "decal_position_y": -0.18,
+          "decal_position_z": 0.18,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        },
+        {
+          "decal_position_x": -0.09,
+          "decal_position_y": -0.18,
+          "decal_position_z": 0.18,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        }
+      ]
+    },
+    {
+      "modelName": "bodywarmer",
+      "name": "Bodywarmer met borstzakken",
+      "pockets": [
+        {
+          "decal_position_x": 0.09,
+          "decal_position_y": 0.12,
+          "decal_position_z": 0.18,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        },
+        {
+          "decal_position_x": -0.09,
+          "decal_position_y": 0.12,
+          "decal_position_z": 0.18,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        }
+      ]
+    },
+    {
+      "modelName": "bodywarmer",
+      "name": "Bodywarmer met borstzakken en zijzakken",
+      "pockets": [
+        {
+          "decal_position_x": 0.09,
+          "decal_position_y": -0.18,
+          "decal_position_z": 0.18,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        },
+        {
+          "decal_position_x": -0.09,
+          "decal_position_y": -0.18,
+          "decal_position_z": 0.18,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        },
+        {
+          "decal_position_x": 0.09,
+          "decal_position_y": 0.12,
+          "decal_position_z": 0.18,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        },
+        {
+          "decal_position_x": -0.09,
+          "decal_position_y": 0.12,
+          "decal_position_z": 0.18,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        }
+      ]
+    },
+    {
+      "modelName": "vest_met_zip",
+      "name": "Jas/vest met zip",
+      "pockets": []
+    },
+    {
+      "modelName": "vest_met_zip",
+      "name": "Jas/vest met zip en borstzak links",
+      "pockets": [
+        {
+          "decal_position_x": 0.1,
+          "decal_position_y": 0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        }
+      ]
+    },
+    {
+      "modelName": "vest_met_zip",
+      "name": "Jas/vest met zip en borstzak rechts",
+      "pockets": [
+        {
+          "decal_position_x": -0.1,
+          "decal_position_y": 0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        }
+      ]
+    },
+    {
+      "modelName": "vest_met_zip",
+      "name": "Jas/vest met zip en 2× borstzak",
+      "pockets": [
+        {
+          "decal_position_x": 0.1,
+          "decal_position_y": 0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        },
+        {
+          "decal_position_x": -0.1,
+          "decal_position_y": 0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        }
+      ]
+    },
+    {
+      "modelName": "vest_met_zip",
+      "name": "Jas/vest met zip en zijzakken",
+      "pockets": [
+        {
+          "decal_position_x": 0.1,
+          "decal_position_y": -0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        },
+        {
+          "decal_position_x": -0.1,
+          "decal_position_y": -0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        }
+      ]
+    },
+    {
+      "modelName": "vest_met_zip",
+      "name": "Jas/vest met zip en zijzakken en 2x borstzak",
+      "pockets": [
+        {
+          "decal_position_x": 0.1,
+          "decal_position_y": -0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        },
+        {
+          "decal_position_x": -0.1,
+          "decal_position_y": -0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        },
+        {
+          "decal_position_x": 0.1,
+          "decal_position_y": 0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        },
+        {
+          "decal_position_x": -0.1,
+          "decal_position_y": 0.14,
+          "decal_position_z": 0.16,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        }
+      ]
+    },
+    {
+      "modelName": "hoodie_met_zip",
+      "name": "Jas/vest met zip en capuchon",
+      "pockets": []
+    },
+    {
+      "modelName": "lange_broek",
+      "name": "Lange broek",
+      "pockets": []
+    },
+    {
+      "modelName": "lange_broek",
+      "name": "Lange werkbroek met cargozakken",
+      "pockets": [
+        {
+          "decal_position_x": -0.1,
+          "decal_position_y": 0.03,
+          "decal_position_z": 0.01,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.17
+        },
+        {
+          "decal_position_x": 0.1,
+          "decal_position_y": 0.03,
+          "decal_position_z": 0.01,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.17
+        },
+        {
+          "decal_position_x": 0.1,
+          "decal_position_y": 0.06,
+          "decal_position_z": -0.26,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.17
+        },
+        {
+          "decal_position_x": -0.1,
+          "decal_position_y": 0.06,
+          "decal_position_z": -0.26,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.17
+        },
+        {
+          "decal_position_x": -0.23,
+          "decal_position_y": -0.16,
+          "decal_position_z": -0.04,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": -1.5717963267949,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.17
+        },
+        {
+          "decal_position_x": 0.23,
+          "decal_position_y": -0.16,
+          "decal_position_z": -0.04,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": -1.5717963267949,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.17
+        }
+      ]
+    },
+    {
+      "modelName": "korte_broek",
+      "name": "Korte broek",
+      "pockets": []
+    },
+    {
+      "modelName": "korte_broek",
+      "name": "Korte broek met cargozakken",
+      "pockets": [
+        {
+          "decal_position_x": 0.12,
+          "decal_position_y": 0.04,
+          "decal_position_z": 0.1,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        },
+        {
+          "decal_position_x": -0.12,
+          "decal_position_y": 0.04,
+          "decal_position_z": 0.1,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.18
+        },
+        {
+          "decal_position_x": -0.16,
+          "decal_position_y": -0.11,
+          "decal_position_z": 0.1,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.15
+        },
+        {
+          "decal_position_x": 0.14,
+          "decal_position_y": -0.11,
+          "decal_position_z": 0.1,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.15
+        }
+      ]
+    },
+    {
+      "modelName": "overall",
+      "name": "Overall",
+      "pockets": []
+    },
+    {
+      "modelName": "overall",
+      "name": "Overall met zijzakken",
+      "pockets": [
+        {
+          "decal_position_x": 0.13,
+          "decal_position_y": -0.11,
+          "decal_position_z": 0.05,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 1.5697963267949,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.15
+        },
+        {
+          "decal_position_x": -0.13,
+          "decal_position_y": -0.11,
+          "decal_position_z": 0.05,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 1.5697963267949,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.15
+        }
+      ]
+    },
+    {
+      "modelName": "overall",
+      "name": "Overall met borstzakken",
+      "pockets": [
+        {
+          "decal_position_x": 0.08,
+          "decal_position_y": 0.31,
+          "decal_position_z": 0.09,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        },
+        {
+          "decal_position_x": -0.08,
+          "decal_position_y": 0.31,
+          "decal_position_z": 0.09,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        }
+      ]
+    },
+    {
+      "modelName": "overall",
+      "name": "Overall met zijzakken en borstzakken",
+      "pockets": [
+        {
+          "decal_position_x": 0.08,
+          "decal_position_y": 0.31,
+          "decal_position_z": 0.09,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        },
+        {
+          "decal_position_x": -0.08,
+          "decal_position_y": 0.31,
+          "decal_position_z": 0.09,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.13
+        },
+        {
+          "decal_position_x": 0.13,
+          "decal_position_y": -0.11,
+          "decal_position_z": 0.05,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 1.5697963267949,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.15
+        },
+        {
+          "decal_position_x": -0.13,
+          "decal_position_y": -0.11,
+          "decal_position_z": 0.05,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 1.5697963267949,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.15
+        }
+      ]
+    },
+    {
+      "modelName": "tuinbroek",
+      "name": "Tuinbroek",
+      "pockets": []
+    },
+    {
+      "modelName": "schort_kort",
+      "name": "Schort kort",
+      "pockets": []
+    },
+    {
+      "modelName": "schort_lang",
+      "name": "Schort lang",
+      "pockets": []
+    },
+    {
+      "modelName": "schort_lang",
+      "name": "Schort lang met kangaroo-zak",
+      "pockets": [
+        {
+          "decal_position_x": 0,
+          "decal_position_y": 0.08,
+          "decal_position_z": 0.11,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.3
+        }
+      ]
+    },
+    {
+      "modelName": "koksbuis",
+      "name": "Koksbuis",
+      "pockets": []
+    },
+    {
+      "modelName": "pet",
+      "name": "Pet",
+      "pockets": []
+    },
+    {
+      "modelName": "muts",
+      "name": "Muts",
+      "pockets": []
+    },
+    {
+      "modelName": "gilet",
+      "name": "Gilet",
+      "pockets": []
+    },
+    {
+      "modelName": "gilet",
+      "name": "Gilet met zakken",
+      "pockets": [
+        {
+          "decal_position_x": 0.1,
+          "decal_position_y": -0.17,
+          "decal_position_z": 0.11,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.15
+        },
+        {
+          "decal_position_x": -0.1,
+          "decal_position_y": -0.17,
+          "decal_position_z": 0.11,
+          "decal_rotation_x": 0,
+          "decal_rotation_y": 0,
+          "decal_rotation_z": 0,
+          "decal_scale": 0.15
+        }
+      ]
+    },
+    {
+      "modelName": "labjas",
+      "name": "Labjas",
+      "pockets": []
+    }
+  ]
+}
