@@ -57,8 +57,8 @@ export const App: React.FC = () => {
                 enableRotate
                 enablePan
                 enableZoom
-                minDistance={snap.minZoom}
-                maxDistance={snap.maxZoom}
+                minDistance={0.3}
+                maxDistance={2}
                 zoomSpeed={1}
             />
         </Canvas>
@@ -80,8 +80,7 @@ function Model(props: JSX.IntrinsicElements['mesh']) {
 
     const nodes = gltf.nodes || {}
     const keys = Object.keys(nodes)
-    const idx = snap.model.geometryNode
-    const nodeKey = keys[idx]
+    const nodeKey = keys[1]
     const geometry = nodes[nodeKey]?.geometry
     if (!geometry) {
         console.warn('Geometry node missing:', nodeKey)
@@ -99,14 +98,14 @@ function Model(props: JSX.IntrinsicElements['mesh']) {
 
     return (
         <mesh geometry={geometry} material={material} material-roughness={1} dispose={null} {...props}>
-            <Decal
-                position={[0.1, 0.17, 0.08]}
-                rotation={[0, 0, 0]}
-                scale={0.1}
-                map={pocketTexture}
-                polygonOffsetFactor={-1}
-                depthTest
-            />
+            {/*<Decal*/}
+            {/*    position={[0.1, 0.17, 0.08]}*/}
+            {/*    rotation={[0, 0, 0]}*/}
+            {/*    scale={0.1}*/}
+            {/*    map={pocketTexture}*/}
+            {/*    polygonOffsetFactor={-1}*/}
+            {/*    depthTest*/}
+            {/*/>*/}
             <Decal
                 debug={snap.debug}
                 position={snap.decalPos}

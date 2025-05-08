@@ -24,21 +24,28 @@ export const Overlay: React.FC = () => {
         const file = e.target.files?.[0]
         if (!file) return
         const url = URL.createObjectURL(file)
-        state.models = [...snap.models, { name: url, geometryNode: 1, url }]
-        state.model = { name: url, geometryNode: 1, url }
+        state.models = [...snap.models, { name: url, url }]
+        state.model = { name: url, url }
     }
 
     const exportState = () => {
         const data = {
-            minZoom: snap.minZoom,
-            maxZoom: snap.maxZoom,
-            decalPos: snap.decalPos,
-            decalRot: snap.decalRot,
-            decalScale: snap.decalScale,
-            modelName: snap.model.name,
-            cameraPos: snap.cameraPos,
-            cameraRot: snap.cameraRot,
-            cameraTarget: snap.cameraTarget,
+            decal_position_x: snap.decalPos[0],
+            decal_position_y: snap.decalPos[1],
+            decal_position_z: snap.decalPos[2],
+            decal_rotation_x: snap.decalRot[0],
+            decal_rotation_y: snap.decalRot[1],
+            decal_rotation_z: snap.decalRot[2],
+            decal_scale: snap.decalScale,
+            camera_position_x: snap.cameraPos[0],
+            camera_position_y: snap.cameraPos[1],
+            camera_position_z: snap.cameraPos[2],
+            camera_rotation_x: snap.cameraRot[0],
+            camera_rotation_y: snap.cameraRot[1],
+            camera_rotation_z: snap.cameraRot[2],
+            camera_target_x: snap.cameraTarget[0],
+            camera_target_y: snap.cameraTarget[1],
+            camera_target_z: snap.cameraTarget[2],
         }
         const json = JSON.stringify(data, null, 2)
         const blob = new Blob([json], {type: 'application/json'})
@@ -99,11 +106,6 @@ export const Overlay: React.FC = () => {
                                     </option>
                                 ))}
                             </select>
-                            <input
-                                type="number"
-                                value={snap.model.geometryNode}
-                                onChange={e => state.model.geometryNode = parseInt(e.target.value)}
-                            />
                             <input
                                 type="file"
                                 accept=".glb"
@@ -285,55 +287,6 @@ export const Overlay: React.FC = () => {
                             }}
                         />
                     </div>
-
-                    <div className={"decals section"}>
-                        <b>Scene settings</b>
-                        <label>
-                            Min zoom:{' '}
-                            <input
-                                className={'value-display'}
-                                value={snap.minZoom}
-                                onChange={(e) => {
-                                    const x = parseFloat(e.target.value)
-                                    state.minZoom = x
-                                }}
-                            />
-                        </label>
-                        <input
-                            type="range"
-                            min={0.2}
-                            max={1}
-                            step={0.1}
-                            value={snap.minZoom}
-                            onChange={(e) => {
-                                const x = parseFloat(e.target.value)
-                                state.minZoom = x
-                            }}
-                        />
-                        <label>
-                            Max zoom:{' '}
-                            <input
-                                className={'value-display'}
-                                value={snap.maxZoom}
-                                onChange={(e) => {
-                                    const x = parseFloat(e.target.value)
-                                    state.maxZoom = x
-                                }}
-                            />
-                        </label>
-                        <input
-                            type="range"
-                            min={1}
-                            max={2}
-                            step={0.1}
-                            value={snap.maxZoom}
-                            onChange={(e) => {
-                                const x = parseFloat(e.target.value)
-                                state.maxZoom = x
-                            }}
-                        />
-                    </div>
-
                     <button
                         className="share"
                         onClick={exportState}
