@@ -163,13 +163,13 @@
       "name": "Polo korte mouwen met borstzak links",
       "pockets": [
         {
-          "decal_position_x": 0,
-          "decal_position_y": 0,
-          "decal_position_z": 0,
+          "decal_position_x": 0.08,
+          "decal_position_y": 0.12,
+          "decal_position_z": 0.1,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
-          "decal_scale": 1
+          "decal_scale": 0.12
         }
       ]
     },
@@ -178,13 +178,13 @@
       "name": "Polo korte mouwen met borstzak rechts",
       "pockets": [
         {
-          "decal_position_x": 0,
-          "decal_position_y": 0,
-          "decal_position_z": 0,
+          "decal_position_x": -0.08,
+          "decal_position_y": 0.12,
+          "decal_position_z": 0.1,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
-          "decal_scale": 1
+          "decal_scale": 0.12
         }
       ]
     },
