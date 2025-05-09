@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, useTexture, Decal, Environment, Center, OrbitControls } from '@react-three/drei'
-import { easing } from 'maath'
 import { useSnapshot } from 'valtio'
 import { state, loadVariants } from './store'
 import * as THREE from 'three'
@@ -30,6 +29,41 @@ function CameraSync({ controlsRef }: { controlsRef: React.RefObject<any> }) {
     return null
 }
 
+// Overlay component renders a screen-space crosshair
+export const Overlay: React.FC = () => {
+    return (
+        <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+        }}>
+            {/* Horizontal line */}
+            <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: 0,
+                width: '100%',
+                height: '1px',
+                backgroundColor: 'rgb(150,150,150)',
+                transform: 'translateY(-0.5px)',
+            }} />
+            {/* Vertical line */}
+            <div style={{
+                position: 'absolute',
+                left: '50%',
+                top: 0,
+                width: '1px',
+                height: '100%',
+                backgroundColor: 'rgb(150,150,150)',
+                transform: 'translateX(-0.5px)',
+            }} />
+        </div>
+    )
+}
+
 export const App: React.FC = () => {
     useEffect(() => { loadVariants() }, [])
 
@@ -39,33 +73,39 @@ export const App: React.FC = () => {
     if (!snap.model) return null
 
     return (
-        <Canvas
-            shadows
-            camera={{ position: state.cameraPos, fov: 60 }}
-            gl={{ preserveDrawingBuffer: true }}
-            eventSource={document.getElementById('root')!}
-            eventPrefix="client"
-        >
-            <CameraSync controlsRef={controlsRef} />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <Canvas
+                style={{ position: 'absolute', inset: 0 }}
+                shadows
+                camera={{ position: state.cameraPos, fov: 60 }}
+                gl={{ preserveDrawingBuffer: true }}
+                eventSource={document.getElementById('root')!}
+                eventPrefix="client"
+            >
+                <CameraSync controlsRef={controlsRef} />
 
-            <ambientLight intensity={0.5} />
-            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr" />
-            <directionalLight intensity={1} position={[5, 5, 5]} castShadow />
+                <ambientLight intensity={0.5} />
+                <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr" />
+                <directionalLight intensity={1} position={[5, 5, 5]} castShadow />
 
-            <Center>
-                <Model />
-            </Center>
+                <Center>
+                    <Model />
+                </Center>
 
-            <OrbitControls
-                ref={controlsRef}
-                enableRotate
-                enablePan
-                enableZoom
-                minDistance={0.3}
-                maxDistance={2}
-                zoomSpeed={1}
-            />
-        </Canvas>
+                <OrbitControls
+                    ref={controlsRef}
+                    enableRotate
+                    enablePan
+                    enableZoom
+                    minDistance={0.3}
+                    maxDistance={2}
+                    zoomSpeed={1}
+                />
+            </Canvas>
+
+            {/* Screen-space crosshair overlay */}
+            <Overlay />
+        </div>
     )
 }
 
@@ -114,4 +154,3 @@ function Model() {
         </mesh>
     )
 }
-
