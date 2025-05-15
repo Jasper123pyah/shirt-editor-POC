@@ -31,6 +31,8 @@ export const Overlay: React.FC = () => {
             decal_rotation_y: snap.decalRot[1],
             decal_rotation_z: snap.decalRot[2],
             decal_scale: snap.decalScale,
+            width: snap.decalWidth,
+            height: snap.decalHeight,
             camera_position_x: snap.cameraPos[0],
             camera_position_y: snap.cameraPos[1],
             camera_position_z: snap.cameraPos[2],
@@ -40,6 +42,7 @@ export const Overlay: React.FC = () => {
             camera_target_x: snap.cameraTarget[0],
             camera_target_y: snap.cameraTarget[1],
             camera_target_z: snap.cameraTarget[2],
+            camera_zoom: snap.cameraZoom,
         }
         const json = JSON.stringify(data, null, 2)
         const blob = new Blob([json], {type: 'application/json'})
@@ -200,7 +203,7 @@ export const Overlay: React.FC = () => {
                             type="range"
                             min={-Math.PI - 0.001}
                             max={Math.PI + 0.001}
-                            step={Math.PI / 2}
+                            step={0.01}
                             value={snap.decalRot[0]}
                             onChange={(e) => {
                                 const rx = parseFloat(e.target.value)
@@ -223,7 +226,7 @@ export const Overlay: React.FC = () => {
                             type="range"
                             min={-Math.PI - 0.001}
                             max={Math.PI + 0.001}
-                            step={Math.PI / 2}
+                            step={0.01}
                             value={snap.decalRot[1]}
                             onChange={(e) => {
                                 const ry = parseFloat(e.target.value)
@@ -246,7 +249,7 @@ export const Overlay: React.FC = () => {
                             type="range"
                             min={-Math.PI - 0.001}
                             max={Math.PI + 0.001}
-                            step={Math.PI / 2}
+                            step={0.01}
                             value={snap.decalRot[2]}
                             onChange={(e) => {
                                 const rz = parseFloat(e.target.value)
@@ -273,6 +276,48 @@ export const Overlay: React.FC = () => {
                             value={snap.decalScale}
                             onChange={(e) => {
                                 state.decalScale = parseFloat(e.target.value)
+                            }}
+                        />
+
+                        <label>
+                            Width in MM:{' '}
+                            <input
+                                className={'value-display'}
+                                value={snap.decalWidth}
+                                onChange={(e) => {
+                                    state.decalWidth = parseInt(e.target.value)
+                                }}
+                            />
+                        </label>
+                        <input
+                            type="range"
+                            min={1}
+                            max={1000}
+                            step={1}
+                            value={snap.decalWidth}
+                            onChange={(e) => {
+                                state.decalWidth = parseInt(e.target.value)
+                            }}
+                        />
+
+                        <label>
+                            Height in MM:{' '}
+                            <input
+                                className={'value-display'}
+                                value={snap.decalHeight}
+                                onChange={(e) => {
+                                    state.decalHeight = parseInt(e.target.value)
+                                }}
+                            />
+                        </label>
+                        <input
+                            type="range"
+                            min={1}
+                            max={1000}
+                            step={1}
+                            value={snap.decalHeight}
+                            onChange={(e) => {
+                                state.decalHeight = parseInt(e.target.value)
                             }}
                         />
                     </div>

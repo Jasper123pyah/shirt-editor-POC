@@ -36,10 +36,13 @@ interface State {
     decalPos: [number, number, number]
     decalRot: [number, number, number]
     decalScale: number
+    decalHeight: number
+    decalWidth: number
 
     cameraPos: [number, number, number]
     cameraRot: [number, number, number]
     cameraTarget: [number, number, number]
+    cameraZoom: number
 }
 
 export const state = proxy<State>({
@@ -62,17 +65,19 @@ export const state = proxy<State>({
     decalPos: [0, 0.17, 0.13],
     decalRot: [0, 0, 0],
     decalScale: 0.12,
+    decalHeight: 300,
+    decalWidth: 300,
 
     cameraPos: [0, 0, 2.5],
     cameraRot: [0, 0, 0],
     cameraTarget: [0, 0, 0],
+    cameraZoom: 1
+
 })
 
 export async function loadVariants() {
-    console.log('load')
     const res = await fetch('/models.json')
     const json = await res.json()
-    console.log(json)
     state.models = mapJson(json)
     if (!state.model) state.model = state.models[0]
 }
