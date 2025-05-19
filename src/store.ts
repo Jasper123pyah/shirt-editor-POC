@@ -48,7 +48,7 @@ interface State {
 export const state = proxy<State>({
     colors: ['#ccc', '#EFBD4E', '#80C670', '#726DE8', '#EF674E', '#353934'],
     color: '#bbb',
-    decal: 'proforto',
+    decal: 'logo',
     debug: false,
 
     model: {
