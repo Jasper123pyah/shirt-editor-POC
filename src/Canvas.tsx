@@ -1,9 +1,23 @@
 import React, { useEffect, useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { useGLTF, useTexture, Decal, Environment, Center, OrbitControls } from '@react-three/drei'
+import {useGLTF, useTexture, Decal, Environment, Center, OrbitControls, Html} from '@react-three/drei'
 import { useSnapshot } from 'valtio'
 import { state, loadVariants } from './store'
 import * as THREE from 'three'
+
+function useModelSizeMM(object: THREE.Object3D | undefined) {
+    const sizeMM = React.useMemo(() => {
+        if (!object) return null
+
+        const box  = new THREE.Box3().setFromObject(object)
+        const size = new THREE.Vector3()
+        box.getSize(size)
+
+        return size.multiplyScalar(1_000)
+    }, [object])
+
+    return sizeMM
+}
 
 // Syncs orthographic camera transforms and zoom
 function CameraSync({ controlsRef }: { controlsRef: React.RefObject<any> }) {
@@ -123,18 +137,15 @@ export const App: React.FC = () => {
 }
 
 function Model() {
+
     const snap = useSnapshot(state)
 
 
     const pocketTexture = useTexture('/pocket.png')
     const decalTexture  = useTexture(`/${snap.decal}.png`)
 
-    const decalRatio = snap.decalHeight / snap.decalWidth
 
-    const longestSide = snap.decalScale
-    const decalScale  = decalRatio >= 1
-        ? [longestSide / decalRatio, longestSide, longestSide]
-        : [longestSide, longestSide * decalRatio, longestSide]
+    const decalScale  = snap.decalScale
 
     const gltf        = useGLTF(`/${snap.model!.slug}.glb`) as any
     const materialRef = useRef<any>()
@@ -146,29 +157,49 @@ function Model() {
     const meshNode = Object.values(gltf.nodes)[1] as any
     const meshMat  = Object.values(gltf.materials)[0] as any
     materialRef.current = meshMat
+
+    const sizeMM = useModelSizeMM(meshNode)
+
+    useEffect(() => {
+        if (!sizeMM) return
+
+        state.modelSizeWorld = [sizeMM.x / 1_000, sizeMM.y / 1_000, sizeMM.z / 1_000]
+        state.modelSizeMM    = [sizeMM.x,         sizeMM.y,         sizeMM.z]
+    }, [sizeMM])
+
     return (
-        <mesh geometry={meshNode.geometry} material={meshMat} material-roughness={1} dispose={null}>
-            {snap.model!.pockets.map((pocket, i) => (
+        <>
+
+            <mesh geometry={meshNode.geometry} material={meshMat} material-roughness={1} dispose={null}>
+                {snap.model!.pockets.map((pocket, i) => (
+                    <Decal
+                        key={`pocket-${i}`}
+                        map={pocketTexture}
+                        position={[pocket.decal_position_x, pocket.decal_position_y, pocket.decal_position_z]}
+                        rotation={[pocket.decal_rotation_x, pocket.decal_rotation_y, pocket.decal_rotation_z]}
+                        scale={pocket.decal_scale}
+                        polygonOffsetFactor={-1}
+                        depthTest
+                    />
+                ))}
+
                 <Decal
-                    key={`pocket-${i}`}
-                    map={pocketTexture}
-                    position={[pocket.decal_position_x, pocket.decal_position_y, pocket.decal_position_z]}
-                    rotation={[pocket.decal_rotation_x, pocket.decal_rotation_y, pocket.decal_rotation_z]}
-                    scale={pocket.decal_scale}
-                    polygonOffsetFactor={-1}
+                    debug={snap.debug}
+                    map={decalTexture}
+                    position={snap.decalPos}
+                    rotation={snap.decalRot}
+                    scale={decalScale}
+                    polygonOffsetFactor={-2}
                     depthTest
                 />
-            ))}
+            </mesh>
 
-            <Decal
-                debug={snap.debug}
-                map={decalTexture}
-                position={snap.decalPos}
-                rotation={snap.decalRot}
-                scale={decalScale}
-                polygonOffsetFactor={-2}
-                depthTest
-            />
-        </mesh>
+            {sizeMM && (
+                <Html>
+                    {`${sizeMM.x.toFixed(0)} × ${sizeMM.y.toFixed(0)} × ${sizeMM.z.toFixed(0)} mm`}
+                </Html>
+            )}
+        </>
+
     )
 }

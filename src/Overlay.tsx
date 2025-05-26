@@ -22,6 +22,21 @@ export const Overlay: React.FC = () => {
         )
         link.click()
     }
+
+    function updateDecalScale() {
+        const mmToWorldX = state.modelSizeWorld[0] / state.modelSizeMM[0]
+        const mmToWorldY = state.modelSizeWorld[1] / state.modelSizeMM[1]
+
+        if (!mmToWorldX || !mmToWorldY) return   // model not ready yet
+
+        const widthWorld  = state.decalWidth  * mmToWorldX  // metres
+        const heightWorld = state.decalHeight * mmToWorldY  // metres
+        const depthWorld  = 0.08
+
+        state.decalScale = [widthWorld, heightWorld, depthWorld]
+    }
+
+
     const exportState = () => {
         const data = {
             decal_position_x: snap.decalPos[0],
@@ -256,36 +271,14 @@ export const Overlay: React.FC = () => {
                                 state.decalRot = [snap.decalRot[0], snap.decalRot[1], rz]
                             }}
                         />
-
-                        {/* Scale Slider */}
                         <label>
-                            Scale:{' '}
+                            Decal Width in MM:{' '}
                             <input
-                                className={'value-display'}
-                                value={snap.decalScale}
-                                onChange={(e) => {
-                                    state.decalScale = parseFloat(e.target.value)
-                                }}
-                            />
-                        </label>
-                        <input
-                            type="range"
-                            min={0.01}
-                            max={1}
-                            step={0.01}
-                            value={snap.decalScale}
-                            onChange={(e) => {
-                                state.decalScale = parseFloat(e.target.value)
-                            }}
-                        />
-
-                        <label>
-                            Width in MM:{' '}
-                            <input
-                                className={'value-display'}
+                                className="value-display"
                                 value={snap.decalWidth}
                                 onChange={(e) => {
-                                    state.decalWidth = parseInt(e.target.value)
+                                    state.decalWidth = parseInt(e.target.value, 10)
+                                    updateDecalScale()
                                 }}
                             />
                         </label>
@@ -296,20 +289,23 @@ export const Overlay: React.FC = () => {
                             step={1}
                             value={snap.decalWidth}
                             onChange={(e) => {
-                                state.decalWidth = parseInt(e.target.value)
+                                state.decalWidth = parseInt(e.target.value, 10)
+                                updateDecalScale()
                             }}
                         />
 
                         <label>
-                            Height in MM:{' '}
+                            Decal Height in MM:{' '}
                             <input
-                                className={'value-display'}
+                                className="value-display"
                                 value={snap.decalHeight}
                                 onChange={(e) => {
-                                    state.decalHeight = parseInt(e.target.value)
+                                    state.decalHeight = parseInt(e.target.value, 10)
+                                    updateDecalScale()
                                 }}
                             />
                         </label>
+
                         <input
                             type="range"
                             min={1}
@@ -317,7 +313,8 @@ export const Overlay: React.FC = () => {
                             step={1}
                             value={snap.decalHeight}
                             onChange={(e) => {
-                                state.decalHeight = parseInt(e.target.value)
+                                state.decalHeight = parseInt(e.target.value, 10)
+                                updateDecalScale()
                             }}
                         />
                     </div>

@@ -35,7 +35,7 @@ interface State {
 
     decalPos: [number, number, number]
     decalRot: [number, number, number]
-    decalScale: number
+    decalScale: [number, number, number]
     decalHeight: number
     decalWidth: number
 
@@ -43,6 +43,9 @@ interface State {
     cameraRot: [number, number, number]
     cameraTarget: [number, number, number]
     cameraZoom: number
+
+    modelSizeWorld: [number, number, number]
+    modelSizeMM: [number, number, number]
 }
 
 export const state = proxy<State>({
@@ -64,15 +67,16 @@ export const state = proxy<State>({
 
     decalPos: [0, 0.17, 0.13],
     decalRot: [0, 0, 0],
-    decalScale: 0.12,
+    decalScale: [0.12, 0.12, 0.12],
     decalHeight: 300,
     decalWidth: 300,
 
     cameraPos: [0, 0, 2.5],
     cameraRot: [0, 0, 0],
     cameraTarget: [0, 0, 0],
-    cameraZoom: 1
-
+    cameraZoom: 1,
+    modelSizeWorld: [1, 1, 1],
+    modelSizeMM:    [1_000, 1_000, 1_000],
 })
 
 export async function loadVariants() {
