@@ -54,7 +54,7 @@ function CameraSync({controlsRef}: { controlsRef: React.RefObject<any> }) {
 
 function OrthoFrustumSync() {
     const {camera, size} = useThree()
-    const FRUSTUM_SIZE = 1              // world‑space height when zoom = 1
+    const FRUSTUM_SIZE = 1
 
     useEffect(() => {
         if (!(camera instanceof THREE.OrthographicCamera)) return
@@ -71,29 +71,6 @@ function OrthoFrustumSync() {
 
     return null
 }
-
-export const Crosshair: React.FC = () => (
-    <div style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none'}}>
-        <div style={{
-            position: 'absolute',
-            top: '50%',
-            left: 0,
-            width: '100%',
-            height: '1px',
-            backgroundColor: 'rgb(150,150,150)',
-            transform: 'translateY(-0.5px)'
-        }}/>
-        <div style={{
-            position: 'absolute',
-            left: '50%',
-            top: 0,
-            width: '1px',
-            height: '100%',
-            backgroundColor: 'rgb(150,150,150)',
-            transform: 'translateX(-0.5px)'
-        }}/>
-    </div>
-)
 
 export const App: React.FC = () => {
     useEffect(() => {
@@ -150,9 +127,7 @@ export const App: React.FC = () => {
 }
 
 function Model() {
-
     const snap = useSnapshot(state)
-
 
     const pocketTexture = useTexture('/pocket.png')
     const decalTexture = useTexture(`/${snap.decal}.png`)
@@ -172,7 +147,6 @@ function Model() {
 
     useEffect(() => {
         if (!sizeMM) return
-        console.log(sizeMM)
 
         state.modelSizeWorld = [sizeMM.x / 1_000, sizeMM.y / 1_000, sizeMM.z / 1000]
         state.modelSizeMM = [sizeMM.x, sizeMM.y, sizeMM.z]
