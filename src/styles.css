@@ -143,24 +143,30 @@ button:hover {
     transform: scale(1.1);
 }
 
-/* CUSTOMIZER */
 
 .customizer {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 380px;
+
     display: flex;
-    gap: 20px;
-    align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
 
-    margin-bottom: 25px;
-    margin-right: 40px;
-    padding: 40px 0;
+    gap: 20px;
+    padding: 40px 20px;
 
-    @media screen and (max-width: 600px) {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    @media (max-width: 600px) {
+        display: none;
         width: 100%;
-        padding: 20px;
-        overflow: auto;
+        padding: 80px 20px 20px 20px;
     }
 }
+
 
 .section {
     display: flex;
@@ -168,27 +174,14 @@ button:hover {
     gap: 12px;
 }
 
-.customizer__container {
-    display: flex;
-    gap: 40px;
-    align-items: flex-end;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    margin-bottom: 25px;
-    margin-right: 40px;
-    overflow: auto;
-    @media screen and (max-width: 600px) {
-        display: none;
-        align-items: flex-start;
-        background-color: #f0f0f0;
-    }
-}
-
 .open-overlay {
     display: none;
 
     @media screen and (max-width: 600px) {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1100;
         display: block
     }
 }

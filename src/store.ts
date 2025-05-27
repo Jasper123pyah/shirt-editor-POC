@@ -65,18 +65,18 @@ export const state = proxy<State>({
         pockets: []
     }],
 
-    decalPos: [0, 0.17, 0.13],
+    decalPos: [0, 0.17, 0.1],
     decalRot: [0, 0, 0],
     decalScale: [0.12, 0.12, 0.12],
-    decalHeight: 300,
-    decalWidth: 300,
+    decalHeight: 150,
+    decalWidth: 150,
 
     cameraPos: [0, 0, 2.5],
     cameraRot: [0, 0, 0],
     cameraTarget: [0, 0, 0],
     cameraZoom: 1,
     modelSizeWorld: [1, 1, 1],
-    modelSizeMM:    [1_000, 1_000, 1_000],
+    modelSizeMM:    [1000, 1000, 1000],
 })
 
 export async function loadVariants() {
