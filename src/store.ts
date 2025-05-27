@@ -35,7 +35,6 @@ interface State {
 
     decalPos: [number, number, number]
     decalRot: [number, number, number]
-    decalScale: [number, number, number]
     decalHeight: number
     decalWidth: number
 
@@ -67,7 +66,6 @@ export const state = proxy<State>({
 
     decalPos: [0, 0.17, 0.1],
     decalRot: [0, 0, 0],
-    decalScale: [0.12, 0.12, 0.12],
     decalHeight: 150,
     decalWidth: 150,
 

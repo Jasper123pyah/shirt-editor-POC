@@ -157,8 +157,6 @@ function Model() {
     const pocketTexture = useTexture('/pocket.png')
     const decalTexture = useTexture(`/${snap.decal}.png`)
 
-    const decalScale = snap.decalScale
-
     const gltf = useGLTF(`/${snap.model!.slug}.glb`) as any
     const materialRef = useRef<any>()
 
@@ -174,21 +172,20 @@ function Model() {
 
     useEffect(() => {
         if (!sizeMM) return
+        console.log(sizeMM)
 
         state.modelSizeWorld = [sizeMM.x / 1_000, sizeMM.y / 1_000, sizeMM.z / 1000]
         state.modelSizeMM = [sizeMM.x, sizeMM.y, sizeMM.z]
-
-        const mmToWorldX = state.modelSizeWorld[0] / state.modelSizeMM[0]
-        const mmToWorldY = state.modelSizeWorld[1] / state.modelSizeMM[1]
-
-        state.decalScale = [
-            state.decalWidth  * mmToWorldX,
-            state.decalHeight * mmToWorldY,
-            0.08
-        ]
-
     }, [sizeMM])
 
+    const mmToWorldX = state.modelSizeWorld[0] / state.modelSizeMM[0]
+    const mmToWorldY = state.modelSizeWorld[1] / state.modelSizeMM[1]
+
+    const decalScale = [
+        state.decalWidth  * mmToWorldX,
+        state.decalHeight * mmToWorldY,
+        0.08
+    ]
     return (
         <>
 

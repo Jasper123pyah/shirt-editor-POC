@@ -45,7 +45,6 @@ export const Overlay: React.FC = () => {
             decal_rotation_x: snap.decalRot[0],
             decal_rotation_y: snap.decalRot[1],
             decal_rotation_z: snap.decalRot[2],
-            decal_scale: snap.decalScale,
             width: snap.decalWidth,
             height: snap.decalHeight,
             camera_position_x: snap.cameraPos[0],
