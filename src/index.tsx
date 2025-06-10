@@ -29,6 +29,7 @@ export const Crosshair: React.FC = () => (
             backgroundColor: 'rgb(150,150,150)',
             transform: 'translateX(-0.5px)'
         }}/>
+
     </div>
 )
 

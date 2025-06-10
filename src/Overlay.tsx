@@ -23,20 +23,6 @@ export const Overlay: React.FC = () => {
         link.click()
     }
 
-    function updateDecalScale() {
-        const mmToWorldX = state.modelSizeWorld[0] / state.modelSizeMM[0]
-        const mmToWorldY = state.modelSizeWorld[1] / state.modelSizeMM[1]
-
-        if (!mmToWorldX || !mmToWorldY) return   // model not ready yet
-
-        const widthWorld = state.decalWidth * mmToWorldX  // metres
-        const heightWorld = state.decalHeight * mmToWorldY  // metres
-        const depthWorld = 0.08
-
-        state.decalScale = [widthWorld, heightWorld, depthWorld]
-    }
-
-
     const exportState = () => {
         const data = {
             decal_position_x: snap.decalPos[0],
@@ -275,7 +261,6 @@ export const Overlay: React.FC = () => {
                             value={snap.decalWidth}
                             onChange={(e) => {
                                 state.decalWidth = parseInt(e.target.value, 10)
-                                updateDecalScale()
                             }}
                         />
                     </label>
@@ -287,7 +272,6 @@ export const Overlay: React.FC = () => {
                         value={snap.decalWidth}
                         onChange={(e) => {
                             state.decalWidth = parseInt(e.target.value, 10)
-                            updateDecalScale()
                         }}
                     />
 
@@ -298,7 +282,6 @@ export const Overlay: React.FC = () => {
                             value={snap.decalHeight}
                             onChange={(e) => {
                                 state.decalHeight = parseInt(e.target.value, 10)
-                                updateDecalScale()
                             }}
                         />
                     </label>
@@ -311,7 +294,6 @@ export const Overlay: React.FC = () => {
                         value={snap.decalHeight}
                         onChange={(e) => {
                             state.decalHeight = parseInt(e.target.value, 10)
-                            updateDecalScale()
                         }}
                     />
                 </div>

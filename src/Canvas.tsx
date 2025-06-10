@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react'
 import {Canvas, useFrame, useThree} from '@react-three/fiber'
-import {useGLTF, useTexture, Decal, Environment, Center, OrbitControls, Html} from '@react-three/drei'
+import {useGLTF, useTexture, Decal, Environment, Center, OrbitControls} from '@react-three/drei'
 import {useSnapshot} from 'valtio'
 import {state, loadVariants} from './store'
 import * as THREE from 'three'
@@ -12,6 +12,7 @@ function useModelSizeMM(object: THREE.Object3D | undefined) {
         const box = new THREE.Box3().setFromObject(object)
         const size = new THREE.Vector3()
         box.getSize(size)
+        console.log(size)
 
         return size.multiplyScalar(1000)
     }, [object])
@@ -148,8 +149,9 @@ function Model() {
     useEffect(() => {
         if (!sizeMM) return
 
-        state.modelSizeWorld = [sizeMM.x / 1_000, sizeMM.y / 1_000, sizeMM.z / 1000]
+        state.modelSizeWorld = [sizeMM.x / 1_000, sizeMM.y / 1_000, sizeMM.z / 1_000]
         state.modelSizeMM = [sizeMM.x, sizeMM.y, sizeMM.z]
+
     }, [sizeMM])
 
     const mmToWorldX = state.modelSizeWorld[0] / state.modelSizeMM[0]
@@ -161,32 +163,28 @@ function Model() {
         0.08
     ]
     return (
-        <>
-
-            <mesh geometry={meshNode.geometry} material={meshMat} material-roughness={1} dispose={null}>
-                {snap.model!.pockets.map((pocket, i) => (
-                    <Decal
-                        key={`pocket-${i}`}
-                        map={pocketTexture}
-                        position={[pocket.decal_position_x, pocket.decal_position_y, pocket.decal_position_z]}
-                        rotation={[pocket.decal_rotation_x, pocket.decal_rotation_y, pocket.decal_rotation_z]}
-                        scale={pocket.decal_scale}
-                        polygonOffsetFactor={-1}
-                        depthTest
-                    />
-                ))}
-
+        <mesh geometry={meshNode.geometry} material={meshMat} material-roughness={1} dispose={null}>
+            {snap.model!.pockets.map((pocket, i) => (
                 <Decal
-                    debug={snap.debug}
-                    map={decalTexture}
-                    position={snap.decalPos}
-                    rotation={snap.decalRot}
-                    scale={decalScale}
-                    polygonOffsetFactor={-2}
+                    key={`pocket-${i}`}
+                    map={pocketTexture}
+                    position={[pocket.decal_position_x, pocket.decal_position_y, pocket.decal_position_z]}
+                    rotation={[pocket.decal_rotation_x, pocket.decal_rotation_y, pocket.decal_rotation_z]}
+                    scale={pocket.decal_scale}
+                    polygonOffsetFactor={-1}
                     depthTest
                 />
-            </mesh>
-        </>
+            ))}
 
+            <Decal
+                debug={snap.debug}
+                map={decalTexture}
+                position={snap.decalPos}
+                rotation={snap.decalRot}
+                scale={decalScale}
+                polygonOffsetFactor={-2}
+                depthTest
+            />
+        </mesh>
     )
 }
