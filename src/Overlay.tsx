@@ -296,6 +296,18 @@ export const Overlay: React.FC = () => {
                             state.decalHeight = parseInt(e.target.value, 10)
                         }}
                     />
+
+                    <div className="section">
+                        <b>Camera</b>
+                        <label>
+                            Zoom:{' '}
+                            <input
+                                className="value-display"
+                                value={snap.cameraZoom.toFixed(2)}
+                                readOnly
+                            />
+                        </label>
+                    </div>
                 </div>
                 <button
                     className="share"
