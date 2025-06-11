@@ -351,3 +351,33 @@ button:hover {
     display: flex;
     flex-direction: column;
 }
+
+.export-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.export-modal-content {
+    background: white;
+    padding: 20px;
+    max-width: 600px;
+    max-height: 80%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.export-modal pre {
+    background: #f0f0f0;
+    padding: 10px;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow: auto;
+}
