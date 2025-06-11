@@ -348,11 +348,6 @@
       ]
     },
     {
-      "modelName": "hoodie",
-      "name": "Hoodie met borstzak",
-      "pockets": []
-    },
-    {
       "modelName": "bodywarmer",
       "name": "Bodywarmer",
       "pockets": []
@@ -459,7 +454,7 @@
         {
           "decal_position_x": 0.1,
           "decal_position_y": 0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.08,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -474,7 +469,7 @@
         {
           "decal_position_x": -0.1,
           "decal_position_y": 0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.08,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -489,7 +484,7 @@
         {
           "decal_position_x": 0.1,
           "decal_position_y": 0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.08,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -498,7 +493,7 @@
         {
           "decal_position_x": -0.1,
           "decal_position_y": 0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.08,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -513,7 +508,7 @@
         {
           "decal_position_x": 0.1,
           "decal_position_y": -0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.11,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -522,7 +517,7 @@
         {
           "decal_position_x": -0.1,
           "decal_position_y": -0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.11,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -537,7 +532,7 @@
         {
           "decal_position_x": 0.1,
           "decal_position_y": -0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.11,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -546,7 +541,7 @@
         {
           "decal_position_x": -0.1,
           "decal_position_y": -0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.11,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -555,7 +550,7 @@
         {
           "decal_position_x": 0.1,
           "decal_position_y": 0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.08,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -564,7 +559,7 @@
         {
           "decal_position_x": -0.1,
           "decal_position_y": 0.14,
-          "decal_position_z": 0.16,
+          "decal_position_z": 0.08,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -593,7 +588,7 @@
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
-          "decal_scale": 0.17
+          "decal_scale": 0.16
         },
         {
           "decal_position_x": 0.1,
@@ -602,12 +597,12 @@
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
-          "decal_scale": 0.17
+          "decal_scale": 0.16
         },
         {
           "decal_position_x": 0.1,
           "decal_position_y": 0.06,
-          "decal_position_z": -0.26,
+          "decal_position_z": -0.21,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -616,7 +611,7 @@
         {
           "decal_position_x": -0.1,
           "decal_position_y": 0.06,
-          "decal_position_z": -0.26,
+          "decal_position_z": -0.23,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
@@ -658,7 +653,7 @@
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
-          "decal_scale": 0.18
+          "decal_scale": 0.16
         },
         {
           "decal_position_x": -0.12,
@@ -667,14 +662,14 @@
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
           "decal_rotation_z": 0,
-          "decal_scale": 0.18
+          "decal_scale": 0.16
         },
         {
           "decal_position_x": -0.16,
           "decal_position_y": -0.11,
           "decal_position_z": 0.1,
           "decal_rotation_x": 0,
-          "decal_rotation_y": 0,
+          "decal_rotation_y": -0.5,
           "decal_rotation_z": 0,
           "decal_scale": 0.15
         },
@@ -683,7 +678,7 @@
           "decal_position_y": -0.11,
           "decal_position_z": 0.1,
           "decal_rotation_x": 0,
-          "decal_rotation_y": 0,
+          "decal_rotation_y": 0.3,
           "decal_rotation_z": 0,
           "decal_scale": 0.15
         }
@@ -699,7 +694,7 @@
       "name": "Overall met zijzakken",
       "pockets": [
         {
-          "decal_position_x": 0.13,
+          "decal_position_x": 0.14,
           "decal_position_y": -0.11,
           "decal_position_z": 0.05,
           "decal_rotation_x": 0,
@@ -708,7 +703,7 @@
           "decal_scale": 0.15
         },
         {
-          "decal_position_x": -0.13,
+          "decal_position_x": -0.14,
           "decal_position_y": -0.11,
           "decal_position_z": 0.05,
           "decal_rotation_x": 0,
@@ -724,7 +719,7 @@
       "pockets": [
         {
           "decal_position_x": 0.08,
-          "decal_position_y": 0.31,
+          "decal_position_y": 0.35,
           "decal_position_z": 0.09,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
@@ -733,7 +728,7 @@
         },
         {
           "decal_position_x": -0.08,
-          "decal_position_y": 0.31,
+          "decal_position_y": 0.35,
           "decal_position_z": 0.09,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
@@ -748,7 +743,7 @@
       "pockets": [
         {
           "decal_position_x": 0.08,
-          "decal_position_y": 0.31,
+          "decal_position_y": 0.35,
           "decal_position_z": 0.09,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
@@ -757,7 +752,7 @@
         },
         {
           "decal_position_x": -0.08,
-          "decal_position_y": 0.31,
+          "decal_position_y": 0.35,
           "decal_position_z": 0.09,
           "decal_rotation_x": 0,
           "decal_rotation_y": 0,
@@ -765,7 +760,7 @@
           "decal_scale": 0.13
         },
         {
-          "decal_position_x": 0.13,
+          "decal_position_x": 0.14,
           "decal_position_y": -0.11,
           "decal_position_z": 0.05,
           "decal_rotation_x": 0,
@@ -774,7 +769,7 @@
           "decal_scale": 0.15
         },
         {
-          "decal_position_x": -0.13,
+          "decal_position_x": -0.14,
           "decal_position_y": -0.11,
           "decal_position_z": 0.05,
           "decal_rotation_x": 0,
