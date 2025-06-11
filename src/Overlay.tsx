@@ -8,6 +8,7 @@ export const Overlay: React.FC = () => {
     if (!snap.model) return null
 
     const [openOverlay, setOpenOverlay] = React.useState(false)
+    const [exportJson, setExportJson] = React.useState<string | null>(null)
 
     const screenShot = () => {
         const canvas = document.querySelector('canvas')
@@ -45,13 +46,7 @@ export const Overlay: React.FC = () => {
             camera_zoom: snap.cameraZoom,
         }
         const json = JSON.stringify(data, null, 2)
-        const blob = new Blob([json], {type: 'application/json'})
-        const url = URL.createObjectURL(blob)
-        const link = document.createElement('a')
-        link.href = url
-        link.download = snap.model.name + '-scene-settings.json'
-        link.click()
-        URL.revokeObjectURL(url)
+        setExportJson(json)
     }
 
     const stopEvent = (e: React.SyntheticEvent) => {
@@ -64,6 +59,14 @@ export const Overlay: React.FC = () => {
             <button className={'open-overlay'} onClick={() => setOpenOverlay(!openOverlay)}>
                 {openOverlay ? 'Close' : 'Open'} overlay
             </button>
+            {exportJson && (
+                <div className="export-modal" onClick={() => setExportJson(null)}>
+                    <div className="export-modal-content" onClick={stopEvent}>
+                        <pre>{exportJson}</pre>
+                        <button onClick={() => navigator.clipboard.writeText(exportJson)}>COPY</button>
+                    </div>
+                </div>
+            )}
             <div className={`customizer`} style={{display: openOverlay ? 'flex' : ''}}
                  onWheelCapture={stopEvent}
                  onPointerDownCapture={stopEvent}
