@@ -10,9 +10,9 @@ function useModelSizeMM(object: THREE.Object3D | undefined) {
         if (!object) return null
 
         const box = new THREE.Box3().setFromObject(object)
+
         const size = new THREE.Vector3()
         box.getSize(size)
-        console.log(size)
 
         return size.multiplyScalar(1000)
     }, [object])

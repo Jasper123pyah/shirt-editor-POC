@@ -44,6 +44,11 @@ export const Overlay: React.FC = () => {
             camera_target_y: snap.cameraTarget[1],
             camera_target_z: snap.cameraTarget[2],
             camera_zoom: snap.cameraZoom,
+            modelSizeMM: {
+                x: snap.modelSizeMM[0],
+                y: snap.modelSizeMM[1],
+                z: snap.modelSizeMM[2],
+            }
         }
         const json = JSON.stringify(data, null, 2)
         setExportJson(json)
