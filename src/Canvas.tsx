@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useLayoutEffect, useRef} from 'react'
 import {Canvas, useFrame, useThree} from '@react-three/fiber'
 import {useGLTF, useTexture, Decal, Environment, Center, OrbitControls} from '@react-three/drei'
 import {useSnapshot} from 'valtio'
@@ -10,7 +10,6 @@ function useModelSizeMM(object: THREE.Object3D | undefined) {
         if (!object) return null
 
         const box = new THREE.Box3().setFromObject(object)
-
         const size = new THREE.Vector3()
         box.getSize(size)
 
@@ -146,7 +145,7 @@ function Model() {
 
     const sizeMM = useModelSizeMM(meshNode)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!sizeMM) return
 
         state.modelSizeWorld = [sizeMM.x / 1_000, sizeMM.y / 1_000, sizeMM.z / 1_000]
