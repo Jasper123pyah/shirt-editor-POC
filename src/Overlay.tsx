@@ -52,6 +52,17 @@ export const Overlay: React.FC = () => {
         setExportJson(json)
     }
 
+    const downloadJson = () => {
+        if (!exportJson) return
+        const blob = new Blob([exportJson], {type: 'application/json'})
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = 'export.json'
+        link.click()
+        URL.revokeObjectURL(url)
+    }
+
     const stopEvent = (e: React.SyntheticEvent) => {
         e.stopPropagation();
     };
@@ -66,7 +77,10 @@ export const Overlay: React.FC = () => {
                 <div className="export-modal" onClick={() => setExportJson(null)}>
                     <div className="export-modal-content" onClick={stopEvent}>
                         <pre>{exportJson}</pre>
-                        <button onClick={() => navigator.clipboard.writeText(exportJson)}>COPY</button>
+                        <div style={{display: 'flex', gap: '10px'}}>
+                            <button onClick={() => navigator.clipboard.writeText(exportJson)}>COPY</button>
+                            <button onClick={downloadJson}>DOWNLOAD</button>
+                        </div>
                     </div>
                 </div>
             )}
