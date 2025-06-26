@@ -48,8 +48,8 @@ interface State {
 }
 
 export const state = proxy<State>({
-    colors: ['#ccc', '#EFBD4E', '#80C670', '#726DE8', '#EF674E', '#353934'],
-    color: '#bbb',
+    colors: ['#fff', '#ccc', '#EFBD4E', '#80C670', '#726DE8', '#EF674E', '#353934'],
+    color: '#fff',
     decal: 'logo',
     debug: false,
 
