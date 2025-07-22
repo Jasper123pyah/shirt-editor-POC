@@ -859,6 +859,16 @@
       "pockets": []
     },
     {
+      "modelName": "softshell_jacket",
+      "name": "Softshell jacket",
+      "pockets": []
+    },
+    {
+      "modelName": "safety_vest",
+      "name": "Safety vest",
+      "pockets": []
+    },
+    {
       "modelName": "schoen_ja",
       "name": "Schoen ja",
       "pockets": []
