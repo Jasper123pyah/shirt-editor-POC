@@ -864,6 +864,11 @@
       "pockets": []
     },
     {
+      "modelName": "softshell_jacket_no_cap",
+      "name": "Softshell jacket zonder capuchon",
+      "pockets": []
+    },
+    {
       "modelName": "safety_vest",
       "name": "Safety vest",
       "pockets": []
